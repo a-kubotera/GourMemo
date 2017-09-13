@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RailsTemplate</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= nav_bar fixed: :top, brand: "Rails4.2.3 Template" do %>
+      <%= menu_group do %>
+        <%= menu_item "Link1",  root_path %>
+        <%= menu_item "Link2", root_path %>
+        <%= menu_item "Link3", root_path %>
+      <% end %>
+      <%= menu_group pull: :right do %>
+        <% if current_user %>
+          <%= menu_item "ログアウト", log_out_path %>
+        <% else %>
+          <%= menu_item "ログイン", new_user_session_path %>
+          <%= menu_item "新規登録", new_user_registration_path %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% flash.each do |key, value| %>
+      <% key = "info" if key == "notice" %>
+      <% key = "danger"  if key == "alert" %>
+      <%= content_tag :div, value, class: "alert alert-#{key}" %>
+    <% end %>
+    <% unless notice.blank? %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% unless alert.blank? %>
+    <p class="alert"><%= alert %></p>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
