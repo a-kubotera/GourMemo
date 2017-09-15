@@ -282,7 +282,12 @@ GEM
       nokogiri (>= 1.5.11, < 2.0.0)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
+    forgery (0.3.12)
+      nokogiri (~> 1.4)
+    forgery_ja (0.2.2)
+      forgery (~> 0.3.8)
     formatador (0.2.5)
+    gimei (0.2.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     gretel (3.0.9)
@@ -537,6 +542,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
     xml-simple (1.1.5)
     yard (0.9.9)
+    yoshida (0.1.1)
 
 PLATFORMS
   ruby
@@ -569,6 +575,8 @@ DEPENDENCIES
   faker (~> 1.1.2)
   fog
   font-awesome-rails
+  forgery_ja
+  gimei
   gretel
   her
   hirb
@@ -605,6 +613,7 @@ DEPENDENCIES
   unicorn
   wareki
   web-console (~> 2.0)
+  yoshida
 
 BUNDLED WITH
    1.16.0.pre.2

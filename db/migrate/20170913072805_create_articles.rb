@@ -11,7 +11,7 @@ class CreateArticles < ActiveRecord::Migration
       t.text    :art_comment                                 #コメント
       t.text    :source                                      #情報の出どころ
       t.integer :user_id                                     #UserID
-      t.integer :evaluate_id                                 #評価ID
+      #t.integer :evaluate_id                                #評価IDは削除
       t.timestamps null: false
     end
   end

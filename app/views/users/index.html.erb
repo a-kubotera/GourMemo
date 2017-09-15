@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>ユーザー一覧</h2>
+  <% @users.each do |user| %>
+    <div class="col-md-3 col-sm-4 col-xs-6 showUser showUser--index">
+
+      <div class="showUser__email">
+        <%= user.email %>
+      </div>
+      <div class="showUser__email">
+        <%= user.name %>
+      </div>
+      <div class="showUser__followButton">
+        <%= render partial: 'follow_form', locals: { user: user } if signed_in?   %>
+      </div>
+    </div>
+  <% end %>
+</div>

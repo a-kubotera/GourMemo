@@ -63,6 +63,9 @@ gem 'pg'#postgresql
 # seed用
 gem 'seed-fu'
 gem 'faker','~> 1.1.2'
+gem 'forgery_ja'
+gem 'yoshida'
+gem 'gimei'
 
 # 検索機能
 gem 'ransack'
