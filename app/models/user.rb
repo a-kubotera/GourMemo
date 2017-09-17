@@ -10,6 +10,12 @@ class User < ActiveRecord::Base
   has_many :followed_users, through: :relationships, source: :followed
   has_many :followers, through: :reverse_relationships, source: :follower
 
+  #イイネ機能
+  has_many :likes, dependent: :destroy
+  #throughを使って　ユーザー目線で、自分がいいね(like)した記事を liked_articles と呼ぶこととする。
+  has_many :liked_articles, through: :likes, source: :article
+
+
   #指定のユーザのフォロー
   def follow!(other_user)
     relationships.create!(followed_id: other_user.id)
@@ -22,5 +28,10 @@ class User < ActiveRecord::Base
   #指定のユーザのフォローを解除する
   def unfollow!(other_user)
     relationships.find_by(followed_id: other_user.id).destroy
+  end
+  
+  #イイねを解除する
+  def already_liked?(article)
+    self.likes.exists?(article_id: article.id)
   end
 end

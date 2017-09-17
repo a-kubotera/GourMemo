@@ -21,6 +21,7 @@ gem 'wareki' #元号表示(平成や昭和など)に対応。案外使える
 gem 'bootstrap-sass'
 gem "font-awesome-rails" #アイコンの使用
 
+
 # TwitterBootstrapの導入　使うときは　rails g bootstrap:themed ○○○
 # http://ruby-rails.hatenadiary.com/entry/20140801/1406818800
 gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
@@ -31,6 +32,8 @@ gem 'twitter-bootstrap-rails' # Bootstrapの本体
 gem 'bootstrap-material-design'
 gem 'material_icons'
 
+# Honoka
+gem 'honoka-rails'
 
 # ユーザー機能
 gem 'devise' #ユーザー機能導入
@@ -133,3 +136,5 @@ end
 
 #Herokuデプロイ用
 gem 'rails_12factor', group: :production
+
+gem 'bullet', :group => :development

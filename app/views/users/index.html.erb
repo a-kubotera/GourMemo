@@ -2,7 +2,11 @@
   <h2>ユーザー一覧</h2>
   <% @users.each do |user| %>
     <div class="col-md-3 col-sm-4 col-xs-6 showUser showUser--index">
-
+      <div class="showUser__avatar">
+        <%= link_to user do %>
+          <%#= profile_img(user)%>
+        <% end %>
+      </div>
       <div class="showUser__email">
         <%= user.email %>
       </div>
