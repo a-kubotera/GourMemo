@@ -1,3 +1,10 @@
+#テストデータをすべて削除
+User.delete_all
+Article.delete_all
+Evaluate.delete_all
+Like.delete_all
+
+
 def time_rand from = Time.local(0), to = Time.now
     Time.at(rand(from.to_f..to.to_f))
 end
@@ -46,7 +53,6 @@ end
     @e_user =(1..30).to_a
     if n > 1
       e_user = @user.id
-
     else
       @e_user.delete(@user.id)
       e_user = @e_user.sample
@@ -60,4 +66,12 @@ end
     )
     n + 1
   end
+end
+30.times do
+  l_artid = (1..30).to_a.sample
+  l_userid = (1..30).to_a.sample
+  Like.create(
+    article_id: l_artid,
+    user_id: l_userid
+  )
 end

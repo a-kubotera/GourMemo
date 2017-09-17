@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'articles/index'
+
+  get 'articles/show'
+
+  get 'articles/new'
+
+  get 'articles/confirm'
+
   get 'relationships/create'
   get 'relationships/destroy'
 
@@ -13,6 +21,13 @@ Rails.application.routes.draw do
   end
 
 
-  resources :users, only: [:index,:show]
+  resources :users, only: [:index,:show] do
+    resources :articles
+  end
+  resources :articles, only: [:index,:show] do
+    resources :likes,  only: [:create, :destroy]
+    resources :evaluates
+  end
+
   resources :relationships, only: [:create, :destroy]
 end

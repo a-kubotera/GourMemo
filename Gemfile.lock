@@ -64,6 +64,9 @@ GEM
       sass (>= 3.3.4)
     bootstrap_form (2.7.0)
     builder (3.2.3)
+    bullet (5.6.1)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.1.0)
     cancancan (2.0.0)
     capistrano (3.6.0)
@@ -299,6 +302,7 @@ GEM
       faraday (>= 0.8, < 1.0)
       multi_json (~> 1.7)
     hirb (0.7.3)
+    honoka-rails (3.3.7)
     httpclient (2.8.3)
     i18n (0.8.6)
     inflecto (0.0.2)
@@ -532,6 +536,7 @@ GEM
     unicorn (5.3.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
+    uniform_notifier (1.10.0)
     warden (1.2.7)
       rack (>= 1.0)
     wareki (0.2.0)
@@ -555,6 +560,7 @@ DEPENDENCIES
   bootstrap-material-design
   bootstrap-sass
   bootstrap_form
+  bullet
   byebug
   cancancan
   capistrano (= 3.6.0)
@@ -580,6 +586,7 @@ DEPENDENCIES
   gretel
   her
   hirb
+  honoka-rails
   jbuilder
   jquery-rails
   kaminari
