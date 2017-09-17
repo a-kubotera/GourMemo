@@ -24,7 +24,7 @@ end
     email:  email,
     name:   name,
     age:    age,
-    addless:address,
+    address:address,
     profile:profile,
     password:password
     #birth: Faker::Date.birthday(18, 65),
