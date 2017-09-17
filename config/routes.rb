@@ -1,33 +1,31 @@
 Rails.application.routes.draw do
-  get 'articles/index'
-
-  get 'articles/show'
-
-  get 'articles/new'
-
-  get 'articles/confirm'
 
   get 'relationships/create'
   get 'relationships/destroy'
-
-  devise_for :users
 
   root 'top#index'
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
+  #ログイン情報の破棄を　log out と呼びたい
   devise_scope :user do
     get '/log_out' => 'devise/sessions#destroy'
   end
-
-
+  # SNSログイン
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
+  #ユーザー周り
   resources :users, only: [:index,:show] do
     resources :articles
   end
+  #記事周り
   resources :articles, only: [:index,:show] do
     resources :likes,  only: [:create, :destroy]
     resources :evaluates
   end
 
+  #フォロー関連
   resources :relationships, only: [:create, :destroy]
 end
