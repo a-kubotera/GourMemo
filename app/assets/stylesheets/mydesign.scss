@@ -1,0 +1,146 @@
+//pcのみの設定
+@mixin mq-pc {
+    @media screen and (min-width: 980px) {
+        @content;
+    }
+}
+//タブレットのみの設定
+@mixin mq-tablet {
+    @media screen and (min-width: 768px) and (max-width: 979px)  {
+        @content;
+    }
+}
+//スマホのみの設定
+@mixin mq-phone {
+    @media screen and (max-width: 767px){
+        @content;
+    }
+}
+//余った文を・・・表示
+@mixin ellipsis{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+//viewportを基準とした相対値でfont sizeを決める
+//(memo)第一引数で基準となる画面幅のフォントサイズ、第二引数で基準となる画面幅を入力する
+@function get_vw($size, $viewport:320){
+  $rate: 100 / $viewport;
+  @return $rate * $size * 1vw;
+}
+@mixin fz_vw($font_size:10){
+  font-size: $font_size * 1px;
+  font-size: get_vw($font_size);
+}
+$colors: (
+    twitter: #55acee,
+    facebook: #3b5998,
+);
+
+@function colors($key) {
+    @return map-get($colors, $key);
+}
+//colors(名前)のように使用
+
+//全体にかかるCommon設定
+body{overflow-x: hidden;}
+.scrollLock{overflow-y: hidden;}
+.btn_sizeM{
+  width:150px;
+}
+
+//ユーザー一覧の詳細デザイン
+//命名規則　
+//.block {} // 親要素
+//.block-element {} // 子要素
+//.block_modifier {} // 親要素のバージョン違い
+//.block-element_modifier {} // 子要素のバージョン違い
+
+//LoginForm
+.links{
+  padding:0px 15px 15px;
+  &-sns {
+   margin-top:5px;
+    >div{
+      margin-bottom:5px;
+      a{
+         display: inline-block;
+         color:#FFFFFF;
+         padding:5px;
+         border-radius: 3px;
+         text-decoration: none !important;
+       }
+     }
+    &_twitter{
+       background-color: colors(twitter) ;
+      }
+    &_facebook{
+       background-color: colors(facebook) ;
+    }
+  }
+}
+.userForm{
+  margin: 0px;
+  padding-bottom: 5px;
+  &_password{
+    padding-bottom: 0px;
+  }
+  &-icon {
+    display: inline-block;
+    position: relative;
+    top:3px;
+    right:20px;
+    margin-bottom: 0px;
+  }
+  &-title {
+    font-weight: bold;
+    display: inline-block;
+    position: relative;
+    right:20px;
+    top:0px;
+    margin-bottom: 0px;
+  }
+  &-form {
+
+  }
+  &-common {
+    margin-top:10px;
+  }
+  &-button {
+    text-align: center;
+  }
+}
+
+
+//アバター等の画像調整サイズ
+img{//Helperに渡すavatar用クラス　すべてimg限定
+  &.avatarSize{
+    &--myPage{
+      @include mq-tablet{
+        max-width:150px;
+        height:auto;
+      }
+      @include mq-pc{
+      width:200px;
+        height:auto;
+      }
+    }
+    &--myPageShow{
+        max-width:150px;
+        height:auto;
+    }
+    &--myPageFollow{
+        max-width:30px;
+        height:auto;
+    }
+    &--topicsDetail{
+        max-height:50px;
+        width:auto;
+    }
+    &--commentIndex{
+      max-width:30px;
+      height:auto;
+      margin:auto;
+    }
+  }
+}
