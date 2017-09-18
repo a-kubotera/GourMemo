@@ -14,7 +14,7 @@
             <li><%= link_to "アカウントの削除", registration_path(resource_name), data: { confirm: "本当に削除してもよろしいですか？?" }, method: :delete%></li>
             <li class="divider"></li>
             <li>
-              <%= link_to "アカウントの削除", registration_path(resource_name), method: :delete, data: { confirm:
+              <%= link_to "アカウントの削除(確認入力付き)", registration_path(resource_name), method: :delete, data: { confirm:
                 "以下のアカウントを削除しますか？<br>
                  <p class='text-danger'>アカウントを削除すると投稿したすべての記事も削除されます。</p>
                 E-mail：<strong>#{current_user.email}</strong><br>
