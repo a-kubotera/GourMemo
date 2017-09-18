@@ -137,4 +137,7 @@ end
 #Herokuデプロイ用
 gem 'rails_12factor', group: :production
 
+#N+1問題？
 gem 'bullet', :group => :development
+#モーダルダイアログをいい感じに
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
