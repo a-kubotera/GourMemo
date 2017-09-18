@@ -1,0 +1,93 @@
+
+<div class="panel panel-default devise-bs">
+  <div class="panel-heading">
+    <div class="bs-component">
+      <ul class="nav nav-tabs" >
+        <li><p class="userForm-pageTitle"><%=@page_title %></p></li>
+        <li class="disabled"><a data-toggle="">基本情報</a></li>
+        <li class="active"><a href="#profile" data-toggle="tab">プロフィール</a></li>
+        <% if @user.id == current_user.id %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              アカウント <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to edit_user_registration_path do %>
+                  <i class="fa fa-pencil fa-fw"></i> 修正する
+                <% end %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to  registration_path(resource_name), method: :delete, data: { confirm:
+                  "以下のアカウントを削除しますか？<br>
+                   <p class='text-danger'>アカウントを削除すると投稿したすべての記事も削除されます。</p>
+                  E-mail：<strong>#{current_user.email}</strong><br>
+                  お名前：<strong>#{current_user.name.blank?? "未登録" : current_user.name}</strong><br>
+                  投稿記事数：<strong>#{current_user.articles.count}件</strong><br>",
+                  "commit" => "削除する",
+                  "cancel" => "やっぱりやめる",
+                  "verify" => current_user.email,
+                  "verify-text" => "確認のため、登録アドレスを入力してください。"
+                  },
+                  title: "アカウントの削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
+                <% end %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+        <li class="active"><a href="#profile" data-toggle="tab">プロフィール</a></li>
+        <li class="active"><a href="#profile" data-toggle="tab">プロフィール</a></li>
+        <li class="active"><a href="#profile" data-toggle="tab">プロフィール</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade col-xs-12" id="base">
+        <div class="col-xs-12 userForm userForm_email">
+          <p class="userForm-icon"><%= material_icon.mail.md_18 %></p>
+          <p class="userForm-title">E-mail</p>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <%= @user.email%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade active in col-xs-12" id="profile">
+        <div class="col-xs-4 userForm userForm_avater">
+          <div class="col-md-12">
+            <p id="defAvater"><%= profile_img(@user,"avatarSize--myPage") if profile_img(@user) %></p>
+          </div>
+        </div>
+        <div class="col-xs-8 userForm userForm_name">
+          <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
+          <p class="userForm-title">お名前</p>
+          <div class="well well-sm">
+            <%= @user.name%>
+          </div>
+        </div>
+        <div class="col-xs-8 userForm userForm_address">
+          <p class="userForm-icon"><%= material_icon.person_pin.md_18 %></p>
+          <p class="userForm-title">住所</p>
+          <div class="well well-sm">
+            <%= @user.address%>
+          </div>
+        </div>
+        <div class="col-xs-8 userForm userForm_age">
+          <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
+          <p class="userForm-title">年齢</p>
+          <div class="well well-sm">
+            <%= @user.age%>
+          </div>
+        </div>
+        <div class="col-xs-12 userForm userForm_profile">
+          <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
+          <p class="userForm-title">プロフィール</p>
+          <div class="well well-sm userForm_br"><%= @user.profile%></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

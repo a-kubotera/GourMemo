@@ -42,13 +42,20 @@ $colors: (
 }
 //colors(名前)のように使用
 
+//改行を許可
+@mixin acceptBR{
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+
 //全体にかかるCommon設定
 body{overflow-x: hidden;}
 .scrollLock{overflow-y: hidden;}
 .btn_sizeM{
   width:150px;
 }
-
+.pageTitle{color:black !important;}
 //ユーザー一覧の詳細デザイン
 //命名規則　
 //.block {} // 親要素
@@ -82,10 +89,18 @@ body{overflow-x: hidden;}
 .userForm{
   margin: 0px;
   padding-bottom: 5px;
+  &-pageTitle{
+    font-size:20px;
+    font-weight: bolder;
+    padding-right: 5px;
+    padding-left: 5px;
+  }
   &_password{
     padding-bottom: 0px;
   }
   &_avater{
+    margin-top:15px;
+    margin-bottom:5px;
     padding:0px !important;
   }
   &-icon {
@@ -106,12 +121,16 @@ body{overflow-x: hidden;}
   &-form {
 
   }
+  &-data{
+
+  }
   &-common {
     margin-top:10px;
   }
   &-button {
     text-align: center;
   }
+  &_br{@include acceptBR;}
 }
 
 
