@@ -43,16 +43,18 @@
             <p class="userForm-title"><%= f.label :email %></p>
             <p class="userForm-form"><%= f.email_field :email, autofocus: true, class: 'form-control' %></p>
           </div>
-          <div class="col-xs-12 userForm userForm_password">
-            <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
-            <p class="userForm-title">新しいパスワード (<%= @minimum_password_length %>文字以上)</p>
-            <p class="userForm-form"><%= f.password_field :password, autocomplete: "off", class: 'form-control' %></p>
-          </div>
-          <div class="col-xs-12 userForm userForm_password">
-            <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
-            <p class="userForm-title"><%= f.label :password_confirmation %></p>
-            <p class="userForm-form"><%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %></p>
-          </div>
+          <% if @user.provider.blank? %>
+            <div class="col-xs-12 userForm userForm_password">
+              <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
+              <p class="userForm-title">新しいパスワード (<%= @minimum_password_length %>文字以上)</p>
+              <p class="userForm-form"><%= f.password_field :password, autocomplete: "off", class: 'form-control' %></p>
+            </div>
+            <div class="col-xs-12 userForm userForm_password">
+              <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
+              <p class="userForm-title"><%= f.label :password_confirmation %></p>
+              <p class="userForm-form"><%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %></p>
+            </div>
+          <% end %>
         </div>
         <div class="tab-pane fade col-xs-12" id="profile">
           <div class="col-xs-4 userForm userForm_avater">
