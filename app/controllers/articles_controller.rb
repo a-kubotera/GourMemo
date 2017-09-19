@@ -7,10 +7,17 @@ class ArticlesController < ApplicationController
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
+    # binding.pry
+    @test ="testesteste"
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @articles = @user.articles # ここでアソシエーションが生きる
+      @articles = @user.articles
+      respond_to do |format|
+        format.js
+      end
+
     else
+      # binding.pry
       @articles = Article.all
     end
   end

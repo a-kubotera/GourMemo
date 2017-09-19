@@ -92,7 +92,7 @@ body{overflow-x: hidden;}
   &-pageTitle{
     font-size:20px;
     font-weight: bolder;
-    padding-right: 5px;
+    padding-right: 15px;
     padding-left: 5px;
   }
   &_password{
@@ -109,6 +109,9 @@ body{overflow-x: hidden;}
     top:3px;
     right:20px;
     margin-bottom: 0px;
+    &_fa{
+      top:0px;
+    }
   }
   &-title {
     font-weight: bold;

@@ -4,6 +4,6 @@ class Users::RegistrationsController  < Devise::RegistrationsController
     super
   end
   def edit
-    @page_title = "マイページ"
+    @page_title = "マイページ(修正)"  
   end
 end

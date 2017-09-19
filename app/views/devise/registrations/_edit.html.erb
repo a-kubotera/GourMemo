@@ -11,11 +11,7 @@
             アカウント <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li>
-              <%= link_to edit_user_registration_path do %>
-                <i class="fa fa-pencil fa-fw"></i> 修正する
-              <% end %>
-            </li>
+            <li class="disabled"><a><i class="fa fa-pencil fa-fw"></i> 修正する</a></li>
             <li class="divider"></li>
             <li>
               <%= link_to  registration_path(resource_name), method: :delete, data: { confirm:

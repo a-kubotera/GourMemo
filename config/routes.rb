@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
 
+
   get 'relationships/create'
   get 'relationships/destroy'
 
   root 'top#index'
+
+  get 'index2', to: 'top#index2', as: :aaa
+
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
@@ -21,11 +26,10 @@ Rails.application.routes.draw do
     resources :articles
   end
   #記事周り
-  resources :articles, only: [:index,:show] do
+  resources :articles, only: [:index,:show,:edit] do
     resources :likes,  only: [:create, :destroy]
-    resources :evaluates
   end
-
+  resources :evaluates
   #フォロー関連
   resources :relationships, only: [:create, :destroy]
 end

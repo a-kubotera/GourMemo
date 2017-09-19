@@ -7,6 +7,11 @@ class ApplicationController < ActionController::Base
 
   PERMISSIBLE_ATTRIBUTES = %i(name avatar avatar_cache address age profile)
 
+  def after_sign_in_path_for(resource)
+    aaa_path
+  end
+
+
   protected
 
     def configure_permitted_parameters
