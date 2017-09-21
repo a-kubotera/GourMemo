@@ -9,7 +9,7 @@ $(document).ready(function(){
     const targetClass = e.target.parentElement.className
 
     $('#myTabContent div').removeClass('active in');
-    $(`#${targetClass}`).addClass('active in');
+    $('#'+ targetClass).addClass('active in');
 
     $('.nav-tabs li').removeClass('active');
     $(this).addClass("active")
