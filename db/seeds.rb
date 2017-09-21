@@ -18,6 +18,8 @@ end
   address = @gimei.prefecture.kanji + @gimei.city.kanji + @gimei.town.kanji
   profile = Faker::Lorem.sentence
   password = "password"
+  provider = "provider"
+  uid = rand(1000)
   #
 
   @user = User.create!(
@@ -26,7 +28,9 @@ end
     age:    age,
     address:address,
     profile:profile,
-    password:password
+    password:password,
+    provider:provider,
+    uid:uid
     #birth: Faker::Date.birthday(18, 65),
     #alive: [true, false].sample,
   )
