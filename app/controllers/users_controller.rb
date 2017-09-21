@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @page_title = "ユーザー情報"
     @user = User.find(params[:id])
-    @follow = @user.followers
-    @followed = @user.followed_users
+    #@follow = @user.followers
+    #@followed = @user.followed_users
   end
 end

@@ -1,42 +1,73 @@
-<p id="notice"><%= notice %></p>
-<div class="list-group">
 <% articles.each do |article| %>
-  <div class="list-group-item">
-    <div class="row-action-primary">
-      <%= profile_img(article.user_info,"avatarSize--myPageShow") if profile_img(article.user_info) %>
-    </div>
-    <div class="row-content">
-      <div class="least-content">
-        <span class="topicIndex__date">
-          <%= article.created_at.strftime("%y/%m/%d %p %l:%M") %>投稿
-        </span>
-        <ul class="topicIndex__icons">
-          <li>
-          <%= link_to article do %>
-            <span class=""><%= mi.pageview.md_24 %></span>
-          <% end %>
-          </li>
-          <% if current_user.id == article.user_info.id %>
-            <li>
-            <%= link_to edit_article_path(article.id) do %>
-              <span class=""><%= mi.mode_edit.md_24 %></span>
-            <% end %>
-            </li>
-            <li>
-            <%= link_to article, method: :delete, data: { confirm: '本当に削除してもよろしいでしょうか？' }  do %>
-              <span class=""><%= mi.delete.md_24 %></span>
-            <% end %>
-            </li>
-          <% else %>
-            <li class=""><%= mi.mode_edit.md_24 %></li>
-            <li><%= mi.delete.md_24 %></li>
-          <% end %>
-        </ul>
+  <div class="articleList">
+    <div class="articleList_header row"></div>
+    <div class="row">
+      <div class="articleList-picture col-xs-2">
+        <%= set_picture(article.picture,"imageSize_indexArticle","test") %>
       </div>
-      <p class="list-group-item-heading"><%= article.user_info.name %></p>
-      <p class="list-group-item-text"><%= article.name %></p>
+      <div class="articleList-dateTime col-xs-10 text-muted">
+        <%= article.created_at.strftime("%y/%m/%d %p %l:%M") %>投稿
+      </div>
+      <div class="articleList-title col-xs-10">
+        <%= link_to user_article_path(user_id:@user.id,id:article.id),remote:true do %>
+          <%= article.name %>
+        <% end %>
+      </div>
+      <div class="articleList-content col-xs-10">
+        <%= article.art_comment %>
+      </div>
+    </div>
+    <div class="articleList_footer row">
+      <% if @user.id != article.user_info.id %>
+        <div class="col-xs-3 articleList-contributor">
+        <p class="text-muted articleList_fontMinimum">
+          ~recommended by
+        </p>
+        <%= link_to user_path(id:article.user_info.id) do %>
+          <%= profile_img(article.user_info,"imageSize_indexAvatar") %>
+          <%= article.user_info.name %>
+        <% end %>
+      </div>
+      <% else %>
+        <div class="col-xs-3 articleList-button articleList-button_like">
+          <ul class="nav nav-pills">
+            <li class="active">
+              <%= link_to "" do %>
+                <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!<span class="badge"><%= article.likes.count%></span>
+              <%end%>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col-xs-7">
+        <%# 何を入れようか・・ %>
+      </div>
+      <div class="col-xs-2 articleList-button articleList-button_delete label-danger">
+        <% if article.user_info.id == current_user.id && @user.id == current_user.id %>
+          <% if article.evaluates.count > 0 || article.likes.count > 0
+            @deleteWarning="<br>この記事は<p class='text-danger'>"
+             if article.likes.count> 0
+               @deleteWarning +="● #{article.likes.count}人が注目しています。<br>"
+             end
+             if article.evaluates.count > 0
+               @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
+             end
+             @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
+            end %>
+            <%= link_to  user_article_path(user_id:@user.id,id:article.id), method: :delete, data: { confirm:
+            "本当にこの記事を削除してもよろしいでしょうか？<br>
+            #{@deleteWarning}
+            確認のため下記の文字列を入力してください。<br>
+            <p class='well well-sm'>#{@CAPTCHA = (0...8).map{ (65 + rand(26)).chr }.join}</p>",
+            "commit" => "削除する",
+            "cancel" => "やっぱりやめる",
+            "verify" => @CAPTCHA,
+            },
+            title: "記事の削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <div class="list-group-separator"></div>
 <% end %>
-</div>
+<div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

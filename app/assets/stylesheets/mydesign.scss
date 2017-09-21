@@ -63,7 +63,7 @@ body{overflow-x: hidden;}
 //.block_modifier {} // 親要素のバージョン違い
 //.block-element_modifier {} // 子要素のバージョン違い
 
-//LoginForm
+//SNSのリンク用クラス
 .links{
   padding:0px 15px 15px;
   &-sns {
@@ -86,6 +86,7 @@ body{overflow-x: hidden;}
     }
   }
 }
+//User情報表示用クラス
 .userForm{
   margin: 0px;
   padding-bottom: 5px;
@@ -135,37 +136,100 @@ body{overflow-x: hidden;}
   }
   &_br{@include acceptBR;}
 }
+//記事一覧表示用クラス
+.articleList{
+  &_header{padding-top:10px;}
+  &_footer{border-bottom: 1px solid gainsboro;padding-bottom: 10px;}
+  &-picture{}
+  &-dateTime{
+    text-align:right;
+    font-size:80%;
+  }
+  &-title{
+    padding:5px 0px;
+    font-size:120%;
+    font-weight: bolder;
+  }
+  &-content{
+    @include ellipsis;
+  }
+  &-contributor{
+    font-size:50%;
+    @include ellipsis;
+  }
+  &-button{
+    margin-top:5px;
+    &_delete{
+      padding:5px 10px;
+    >a{
+      color:#FFFFFF;
+      text-decoration: none !important;
+        &:hover{
 
+        }
+      }
+    }
+    &_like{
+      position: relative;
+      right:8px;
+      .nav > li > a{
+        padding:5px 10px;
+      }
+    }
+  }
+  &_fontMinimum{
+    font-size:50%;
+    margin:0px;
+  }
+  &_large{
+    font-size:120%;
+    margin:0px;
+  }
+  //&-picture{}
+}
+//記事詳細 & 修正画面　表示用クラス
+.articleDetail{
+  &-picture{
+    margin-left:150px;
+    padding-bottom:20px;
+  }
+  &-name{
+    font-size:120%
+
+  }
+  &-picture{}
+  &-picture{}
+  &-picture{}
+  &-picture{}
+
+}
 
 //アバター等の画像調整サイズ
 img{//Helperに渡すavatar用クラス　すべてimg限定
-  &.avatarSize{
-    &--myPage{
-      @include mq-tablet{
-        max-width:150px;
-        height:auto;
-      }
-      @include mq-pc{
+  &.imageSize{
+    &_myPage{
       width:200px;
         height:auto;
-      }
     }
-    &--myPageShow{
+    &_myPageShow{
         max-width:150px;
         height:auto;
     }
-    &--myPageFollow{
+    &_myPageFollow{
         max-width:30px;
         height:auto;
     }
-    &--topicsDetail{
-        max-height:50px;
-        width:auto;
+    &_indexArticle{
+        max-width:100px;
+        height:auto;
     }
-    &--commentIndex{
-      max-width:30px;
-      height:auto;
-      margin:auto;
+    &_detailArticle{
+        max-width:200px;
+        height:auto;
+    }
+    &_indexAvatar{
+        max-width:30px;
+        height:auto;
     }
   }
 }

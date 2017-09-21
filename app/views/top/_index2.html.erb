@@ -1,0 +1,58 @@
+<div style="min-width:800px;" class="col-xs-10  col-xs-offset-1 col-md-8 col-md-offset-2">
+  <div class="panel panel-default devise-bs">
+    <div class="panel-heading">
+      <div class="bs-component">
+        <ul class="nav nav-tabs" >
+          <li><p class="userForm-pageTitle"><%=@page_title %></p></li>
+          <li class="news active"><a href="#News" data-toggle="tab">What's New</a></li>
+          <li class="profile"><%= link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do %>プロフィール<%end%></li>
+          <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true},{'data-toggle':'tab'} do %>投稿記事<%end%></li>
+          <li class="evaluate"><a href="#evaluate" data-toggle="tab">評価一覧</a></li>
+          <% if @user.id == current_user.id %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                アカウント <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to edit_user_registration_path do %>
+                    <i class="fa fa-pencil fa-fw"></i> 修正する
+                  <% end %>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to  registration_path(resource_name), method: :delete, data: { confirm:
+                    "以下のアカウントを削除しますか？<br>
+                     <p class='text-danger'>アカウントを削除すると投稿したすべての記事も削除されます。</p>
+                    E-mail：<strong>#{current_user.email}</strong><br>
+                    お名前：<strong>#{current_user.name.blank?? "未登録" : current_user.name}</strong><br>
+                    投稿記事数：<strong>#{current_user.articles.count}件</strong><br>",
+                    "commit" => "削除する",
+                    "cancel" => "やっぱりやめる",
+                    "verify" => current_user.email,
+                    "verify-text" => "確認のため、登録アドレスを入力してください。"
+                    },
+                    title: "アカウントの削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in col-xs-12" id="news" >
+          グルメモへようこそ！
+          このアプリは〜
+
+
+        </div>
+        <div class="tab-pane fade col-xs-12" id="profile"></div>
+        <div class="tab-pane fade col-xs-12" id="article"></div>
+        <div class="tab-pane fade col-xs-12" id="evaluate"><%= render 'evaluates/index' %></div>
+      </div>
+    </div>
+  </div>
+</div>

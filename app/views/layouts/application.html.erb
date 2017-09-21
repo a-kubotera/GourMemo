@@ -6,7 +6,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <div class="bs-component">
       <nav class="navbar navbar-default">
@@ -74,14 +73,6 @@
       <% key = "danger"  if key == "alert" %>
       <%= content_tag :div, value, class: "alert alert-#{key}" %>
     <% end %>
-    <% unless notice.blank? %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-    <% unless alert.blank? %>
-    <p class="alert"><%= alert %></p>
-    <% end %>
-    <div style="padding-left:10px;padding-right:10px;">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
