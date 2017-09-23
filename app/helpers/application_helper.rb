@@ -13,9 +13,15 @@ module ApplicationHelper
     if picture.blank?
       img_url = 'no_image.png'
     else
-      img_url = upicture
+      img_url = picture
     end
     image_tag(img_url, alt: name,class:size)
   end
 
+#引数(ID)がログインユーザーか調べる
+  def login_user?(userid)
+    if userid == current_user.id
+      yield
+    end
+  end
 end

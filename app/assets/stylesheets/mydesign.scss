@@ -159,15 +159,14 @@ body{overflow-x: hidden;}
   }
   &-button{
     margin-top:5px;
-    &_delete{
-      padding:5px 10px;
-    >a{
-      color:#FFFFFF;
-      text-decoration: none !important;
-        &:hover{
-
+      >span{
+        >a{
+        color:#FFFFFF;
+        text-decoration: none !important;
         }
       }
+    &_delete{
+      padding:5px 10px;
     }
     &_like{
       position: relative;
@@ -187,18 +186,39 @@ body{overflow-x: hidden;}
   }
   //&-picture{}
 }
+#like_none{background: silver;
+  .badge{color:gray;}
+}
 //記事詳細 & 修正画面　表示用クラス
+//Bootstrap既存クラスのオーバーライド
+
 .articleDetail{
   &-picture{
-    margin-left:150px;
     padding-bottom:20px;
+    text-align: center;
+    &_button{padding-top:5px;}
   }
   &-name{
     font-size:120%
 
   }
-  &-picture{}
-  &-picture{}
+  &-dataTable{
+    tr > th{
+      width:120px;
+    }
+    tr > td{
+      @include acceptBR;
+    }
+  }
+  &-imput{
+    width:100%;
+    padding:5px;
+    &_textArea
+    {
+      height: 150px;
+      resize: none;
+    }
+  }
   &-picture{}
   &-picture{}
 
@@ -208,27 +228,27 @@ body{overflow-x: hidden;}
 img{//Helperに渡すavatar用クラス　すべてimg限定
   &.imageSize{
     &_myPage{
-      width:200px;
+      width:200px!important;
         height:auto;
     }
     &_myPageShow{
-        max-width:150px;
+        max-width:150px!important;
         height:auto;
     }
     &_myPageFollow{
-        max-width:30px;
+        max-width:30px!important;
         height:auto;
     }
     &_indexArticle{
-        max-width:100px;
+        max-width:100px!important;
         height:auto;
     }
     &_detailArticle{
-        max-width:200px;
+        max-width:200px !important;
         height:auto;
     }
     &_indexAvatar{
-        max-width:30px;
+        max-width:30px!important;
         height:auto;
     }
   }

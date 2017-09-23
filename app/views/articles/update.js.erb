@@ -1,0 +1,6 @@
+<% if @status == 'success' %>
+$("tbody").append("<%= j(render("tr", picture: @picture)) %>");
+<%  elsif @status == 'fail' %>
+alert('error!');
+<% end %>
+$("#user-modal").modal("hide");

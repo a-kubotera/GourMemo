@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   root 'top#index'
 
-  get 'index2', to: 'top#index2', as: :aaa
+  get 'index2', to: 'top#index2', as: :top
 
 
   if Rails.env.development?
@@ -23,10 +23,10 @@ Rails.application.routes.draw do
   }
   #ユーザー周り
   resources :users, only: [:index,:show] do
-    resources :articles
+
   end
   #記事周り
-  resources :articles, only: [:index,:show,:edit] do
+  resources :articles do
     resources :likes,  only: [:create, :destroy]
     resources :evaluates, only: [:index,:show,:new]
   end

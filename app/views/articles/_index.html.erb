@@ -9,7 +9,7 @@
         <%= article.created_at.strftime("%y/%m/%d %p %l:%M") %>投稿
       </div>
       <div class="articleList-title col-xs-10">
-        <%= link_to user_article_path(user_id:@user.id,id:article.id),remote:true do %>
+        <%= link_to article_path(id:article.id),remote:true do %>
           <%= article.name %>
         <% end %>
       </div>
@@ -18,8 +18,9 @@
       </div>
     </div>
     <div class="articleList_footer row">
-      <% if @user.id != article.user_info.id %>
-        <div class="col-xs-3 articleList-contributor">
+      <div class="col-xs-3">
+      <% if article.user_info.id != article.user_info.id %>
+        <div class="articleList-contributor">
         <p class="text-muted articleList_fontMinimum">
           ~recommended by
         </p>
@@ -29,44 +30,48 @@
         <% end %>
       </div>
       <% else %>
-        <div class="col-xs-3 articleList-button articleList-button_like">
+        <div class="articleList-button articleList-button_like">
           <ul class="nav nav-pills">
             <li class="active">
-              <%= link_to "" do %>
+              <% article.likes.count == 0? @lc="like_none" : @lc="" %>
+              <%= link_to "" ,id:@lc do %>
                 <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!<span class="badge"><%= article.likes.count%></span>
               <%end%>
             </li>
           </ul>
         </div>
       <% end %>
+    </div>
       <div class="col-xs-7">
         <%# 何を入れようか・・ %>
       </div>
-      <div class="col-xs-2 articleList-button articleList-button_delete label-danger">
-        <% if article.user_info.id == current_user.id && @user.id == current_user.id %>
-          <% if article.evaluates.count > 0 || article.likes.count > 0
-            @deleteWarning="<br>この記事は<p class='text-danger'>"
-             if article.likes.count> 0
-               @deleteWarning +="● #{article.likes.count}人が注目しています。<br>"
-             end
-             if article.evaluates.count > 0
-               @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
-             end
-             @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
-            end %>
-            <%= link_to  user_article_path(user_id:@user.id,id:article.id), method: :delete, data: { confirm:
-            "本当にこの記事を削除してもよろしいでしょうか？<br>
-            #{@deleteWarning}
-            確認のため下記の文字列を入力してください。<br>
-            <p class='well well-sm'>#{@CAPTCHA = (0...8).map{ (65 + rand(26)).chr }.join}</p>",
-            "commit" => "削除する",
-            "cancel" => "やっぱりやめる",
-            "verify" => @CAPTCHA,
-            },
-            title: "記事の削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
-          <% end %>
-        <% end %>
-      </div>
+      <% login_user?(article.user_info.id) do %>
+        <div class="col-xs-2 articleList-button articleList-button_delete label-danger">
+          <span>
+            <% if article.evaluates.count > 0 || article.likes.count > 0
+              @deleteWarning="<br>この記事は<p class='text-danger'>"
+               if article.likes.count> 0
+                 @deleteWarning +="● #{article.likes.count}人が注目しています。<br>"
+               end
+               if article.evaluates.count > 0
+                 @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
+               end
+               @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
+              end %>
+              <%= link_to article_path(id:article.id), method: :delete, data: { confirm:
+              "本当にこの記事を削除してもよろしいでしょうか？<br>
+              #{@deleteWarning}
+              確認のため下記の文字列を入力してください。<br>
+              <p class='well well-sm'>#{@CAPTCHA = (0...8).map{ (65 + rand(26)).chr }.join}</p>",
+              "commit" => "削除する",
+              "cancel" => "やっぱりやめる",
+              "verify" => @CAPTCHA,
+              },
+              title: "記事の削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
+            <% end %>
+          </span>
+        </div>
+      <% end %>
     </div>
   </div>
 <% end %>

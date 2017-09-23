@@ -20,7 +20,7 @@
                 </li>
                 <% if current_user.id == article.user_id %>
                   <li>
-                  <%= link_to edit_article_path(topic) do %>
+                  <%= link_to edit_article_path(article) do %>
                     <span class=""><%= mi.mode_edit.md_24 %></span>
                   <% end %>
                   </li>

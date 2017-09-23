@@ -4,11 +4,13 @@
       <div class="bs-component">
         <ul class="nav nav-tabs" >
           <li><p class="userForm-pageTitle"><%=@page_title %></p></li>
+
           <li class="news active"><a href="#News" data-toggle="tab">What's New</a></li>
+
           <li class="profile"><%= link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do %>プロフィール<%end%></li>
           <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true},{'data-toggle':'tab'} do %>投稿記事<%end%></li>
           <li class="evaluate"><a href="#evaluate" data-toggle="tab">評価一覧</a></li>
-          <% if @user.id == current_user.id %>
+          <% login_user?(@user.id) do %>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 アカウント <span class="caret"></span>
@@ -44,9 +46,25 @@
     <div class="panel-body">
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in col-xs-12" id="news" >
-          グルメモへようこそ！
-          このアプリは〜
-
+          <% flash.each do |key, value| %>
+            <% key = "info" if key == "notice" %>
+            <% key = "danger"  if key == "alert" %>
+            <%= content_tag :div, value, class: "alert alert-#{key}" %>
+          <% end %>
+          <% login_user?(@user.id) do %>
+            <%= link_to new_article_path ,remote: true do %>
+              <i class="glyphicon glyphicon-gift" aria-hidden="true">
+                <span style="margin-left:-15px;">投稿する</span>
+              </i>
+            <% end %>
+          <% end %>
+          〜最新情報〜
+          <% @followUserArticle.each do |f| %>
+            <% f.each do |d| %>
+            <%# binding.pry %>
+             <%= d[1][:name] %>
+            <% end %>
+          <% end %>
 
         </div>
         <div class="tab-pane fade col-xs-12" id="profile"></div>
@@ -56,3 +74,4 @@
     </div>
   </div>
 </div>
+<div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
