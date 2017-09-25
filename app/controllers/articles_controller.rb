@@ -7,15 +7,12 @@ class ArticlesController < ApplicationController
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
-    @test ="testesteste"
     if params[:user_id]
       @user = User.find(params[:user_id])
       @articles = @user.articles
-      #binding.pry
       respond_to do |format|
         format.js
       end
-      #
     else
       #binding.pry
       @articles = Article.all
@@ -24,7 +21,9 @@ class ArticlesController < ApplicationController
 
   def show
     @like = Like.new() # 追記
-    #binding.pry
+    @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
+    #イイねした人だけが評価できる
+    #@likesEvaluate =  @article.likes.where(user_id:current_user.id)
   end
 
   def new
@@ -40,7 +39,6 @@ class ArticlesController < ApplicationController
         format.html { redirect_to top_path, notice: '投稿しました！' }
         #format.json { render :show, status: :created, location: @article }
         #format.js { @status = "success"}
-        binding.pry
       else
         format.html { render :new }
         format.json { render json: @article.errors, status: :unprocessable_entity }

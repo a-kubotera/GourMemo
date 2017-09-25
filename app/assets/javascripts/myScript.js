@@ -12,8 +12,7 @@ $(document).on('turbolinks:load', function () {
     $(this).addClass("active")
     }
   });
-});
-$(document).on('turbolinks:load', function () {
+
   $('form').on('change', 'input[type="file"]', function(e) {
     $('#thumbnail').remove();
     var file = e.target.files[0],

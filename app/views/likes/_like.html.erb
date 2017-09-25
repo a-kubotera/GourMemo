@@ -1,0 +1,23 @@
+<% if user_signed_in? %>
+<%binding.pry %>
+  <% if @article.like_user(current_user.id) %>
+    <%= button_to article_likes_path(like, article_path: article.id), method: :delete, id: "like-button", remote: true do %>
+      はーと１
+      <span>
+        <%#= tweet.like_count %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= button_to article_likes_path(article), id: "like-button", remote: true do %>
+        はーと２
+      <span>
+        <%#= tweet.like_count %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+    はーと２
+    <span>
+      <%#= tweet.like_count %>
+    </span>
+<% end %>

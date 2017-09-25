@@ -200,15 +200,9 @@ body{overflow-x: hidden;}
   }
   &-name{
     font-size:120%
-
   }
-  &-dataTable{
-    tr > th{
-      width:120px;
-    }
-    tr > td{
-      @include acceptBR;
-    }
+  &-comment{
+    @include acceptBR;
   }
   &-imput{
     width:100%;
@@ -219,8 +213,18 @@ body{overflow-x: hidden;}
       resize: none;
     }
   }
-  &-picture{}
-  &-picture{}
+  &-buttons{
+    text-align: center;
+  }
+  &-dataTable{
+      tr > th{
+        width:120px;
+      }
+    &_divider{
+      padding:0px;
+      height: 1px;
+    }
+  }
 
 }
 
@@ -252,4 +256,33 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
         height:auto;
     }
   }
+}
+
+.evaluate{
+  &-field{display: none!important;}
+  &-table{
+  }
+  &-tableTitle{width:150px;}
+}
+.input-range {
+
+}
+.range-group {
+  position: relative;
+}
+.range-group > a {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-decoration: blink !important;
+}
+.range-group > a:before {
+  content: "☆";
+  font-family: "Ionicons";
+  font-size: 20px;
+  color: #aaa;
+}
+.range-group > a.on:before {
+  content: "★";
+  color: #fc3;
 }

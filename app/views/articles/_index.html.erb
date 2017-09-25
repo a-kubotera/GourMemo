@@ -19,29 +19,29 @@
     </div>
     <div class="articleList_footer row">
       <div class="col-xs-3">
-      <% if article.user_info.id != article.user_info.id %>
-        <div class="articleList-contributor">
-        <p class="text-muted articleList_fontMinimum">
-          ~recommended by
-        </p>
-        <%= link_to user_path(id:article.user_info.id) do %>
-          <%= profile_img(article.user_info,"imageSize_indexAvatar") %>
-          <%= article.user_info.name %>
+        <% if article.user_info.id != article.user_info.id %>
+          <div class="articleList-contributor">
+            <p class="text-muted articleList_fontMinimum">
+              ~recommended by
+            </p>
+            <%= link_to user_path(id:article.user_info.id) do %>
+              <%= profile_img(article.user_info,"imageSize_indexAvatar") %>
+              <%= article.user_info.name %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="articleList-button articleList-button_like">
+            <ul class="nav nav-pills">
+              <li class="active">
+                <% article.likes.count == 0? @lc="like_none" : @lc="" %>
+                <%= link_to "" ,id:@lc do %>
+                  <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!<span class="badge"><%= article.likes.count%></span>
+                <%end%>
+              </li>
+            </ul>
+          </div>
         <% end %>
       </div>
-      <% else %>
-        <div class="articleList-button articleList-button_like">
-          <ul class="nav nav-pills">
-            <li class="active">
-              <% article.likes.count == 0? @lc="like_none" : @lc="" %>
-              <%= link_to "" ,id:@lc do %>
-                <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!<span class="badge"><%= article.likes.count%></span>
-              <%end%>
-            </li>
-          </ul>
-        </div>
-      <% end %>
-    </div>
       <div class="col-xs-7">
         <%# 何を入れようか・・ %>
       </div>
@@ -57,8 +57,12 @@
                  @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
                end
                @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
-              end %>
-              <%= link_to article_path(id:article.id), method: :delete, data: { confirm:
+            else
+              @deleteWarning ="<br>"
+            end
+            %>
+
+            <%= link_to article_path(id:article.id), method: :delete, data: { confirm:
               "本当にこの記事を削除してもよろしいでしょうか？<br>
               #{@deleteWarning}
               確認のため下記の文字列を入力してください。<br>
