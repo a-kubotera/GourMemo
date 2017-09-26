@@ -8,8 +8,8 @@
           <li class="news active"><a href="#News" data-toggle="tab">What's New</a></li>
 
           <li class="profile"><%= link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do %>プロフィール<%end%></li>
-          <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true},{'data-toggle':'tab'} do %>投稿記事<%end%></li>
-          <li class="evaluate"><a href="#evaluate" data-toggle="tab">評価一覧</a></li>
+          <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>投稿記事<%end%></li>
+          <li class="evaluate"><%= link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>評価済み一覧<%end%></li>
           <% login_user?(@user.id) do %>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -17,7 +17,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <%= link_to edit_user_registration_path do %>
+                  <%= link_to edit_user_registration_path,method: :get  do %>
                     <i class="fa fa-pencil fa-fw"></i> 修正する
                   <% end %>
                 </li>
@@ -47,7 +47,7 @@
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in col-xs-12" id="news" >
           <% flash.each do |key, value| %>
-            <% key = "info" if key == "notice" %>
+            <% key = "success" if key == "notice" %>
             <% key = "danger"  if key == "alert" %>
             <%= content_tag :div, value, class: "alert alert-#{key}" %>
           <% end %>
@@ -58,7 +58,30 @@
               </i>
             <% end %>
           <% end %>
-          〜最新情報〜
+          <h4>〜更新情報〜</h4>
+
+          <table class="table table-striped table-hover topTable">
+            <thead>
+              <tr>
+                <th>更新日</th>
+                <th>名前</th>
+                <th>場所</th>
+                <th>評価</th>
+                <th>投稿日</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @articles.each do |f| %>
+                  <tr>
+                    <td class="dateTime"><%= f.updated_at.strftime("%y/%m/%d %H:%M:%S")%></td>
+                    <td class="name"><%= f.name%></td>
+                    <td class="plase"><%= f.station%></td>
+                    <td class="point"></td>
+                    <td class="date"><%= f.created_at.strftime("%y/%m/%d")%></td>
+                  </tr>
+              <% end %>
+            </tbody>
+          </table>
           <% @followUserArticle.each do |f| %>
             <% f.each do |d| %>
             <%# binding.pry %>
@@ -69,7 +92,7 @@
         </div>
         <div class="tab-pane fade col-xs-12" id="profile"></div>
         <div class="tab-pane fade col-xs-12" id="article"></div>
-        <div class="tab-pane fade col-xs-12" id="evaluate"><%= render 'evaluates/index' %></div>
+        <div class="tab-pane fade col-xs-12" id="evaluate"></div>
       </div>
     </div>
   </div>

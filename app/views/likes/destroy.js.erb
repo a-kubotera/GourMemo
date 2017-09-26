@@ -1,1 +1,1 @@
-$("#like-buttons").html("<%= j(render partial: 'like', locals: { articles: @article, likes: @likes }) %>");
+$("#likeForm").html("<%= j(render partial: 'like', locals: { article: @like.article, like: @like }) %>");

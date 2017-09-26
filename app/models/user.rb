@@ -16,6 +16,15 @@ class User < ActiveRecord::Base
   #throughを使って　ユーザー目線で、自分がいいね(like)した記事を liked_articles と呼ぶこととする。
   has_many :liked_articles, through: :likes, source: :article
 
+  #ユーザー評価した記事を取得する
+  has_many :articles_evaluated, through: :evaluates, source: :article
+
+  #スコープmethod
+  #ユーザーの記事全体の中から評価されたものだけ取得する
+  def someone_evaluated
+    articles.joins(:evaluates)
+  end
+
   #facebookログイン
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.find_by(email: auth.info.email)

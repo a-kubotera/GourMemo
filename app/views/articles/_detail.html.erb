@@ -25,7 +25,7 @@
               <th>ジャンル</th>
               <td><%= @article.genre%></td>
             </tr>
-            <tr><th colspan="2" class="divider"></th></tr>
+            <tr><th colspan="2" class="articleDetail-dataTable_divider"></th></tr>
           </table>
             <% unless @evaluate.blank? %>
             <div class="panel panel-danger">
@@ -37,7 +37,7 @@
                   <tr class="">
                     <th>評価日</th>
                     <td class="articleDetail-evaDate">
-                      <%= @evaluate.date.strftime("%y/%m/%d") %>
+                      <%= @evaluate.date.strftime("%Y年 %m月%d日")%>
                     </td>
                   </tr>
                   <tr>
@@ -46,13 +46,16 @@
                       <span style="color: #fc3;"><% @evaluate.evaluate.times{ %>★<%} %></span><span style="color: #aaa;"><% (5 - @evaluate.evaluate).times{ %>☆<%} %></span>
                     </td>
                   </tr>
-                  <tr><th colspan="2" class="rticleDetail-dataTable_divider"></th></tr>
+                  <tr><th colspan="2" class="articleDetail-dataTable_divider"></th></tr>
                 </table>
                 <label class="control-label">コメント</label>
                 <div class="panel panel-default">
                   <div class="panel-body articleDetail-comment"><%= @evaluate.eva_comment%></div>
                 </div>
                 <div class="articleDetail-buttons">
+                  <% if true %>
+                    <div class="articleDetail-buttons_someoneEvaluate"><%= link_to article_evaluates_path(article_id:@article.id),remote:true  do %>他の人の評価<% end %></div>
+                  <% end %>
                   <% if @article.user_info.id == current_user.id %>
                     <%= link_to edit_article_evaluate_path(article_id:@article.id,id:@evaluate.id),remote:true ,class:"btn btn-warning" do %>評価を修正する<% end %>
                   <% end %>
@@ -106,28 +109,8 @@
         </div>
       </div>
       <div class="articleDetail-like" style="display:">
-        <h3>いいね件数: <%= @article.likes.count %></h3>
-        <div class="articleDetail-like like-button">
-          <% if current_user.already_liked?(@article) %>
-            <%= button_to 'いいねを取り消す', article_like_path(@article,@article.likes), method: :delete %>
-          <% else %>
-            <%= form_for [@article, @like] do |f| %>
-              <% if @like.errors.any? %>
-                <% @like.errors.full_messages.each do |msg| %>
-                  <li style="color: red;"><%= msg %></li>
-                <% end %>
-              <% end %>
-              <%= f.submit 'いいね！' %>
-            <% end %>
-          <% end %>
-        </div>
-        <h2>この記事にいいねしたユーザー</h2>
-        <div class="articleDetail-like like-users">
-          <% @article.liked_users.each do |user| %>
-            <li><%= user.email %></li>
-          <% end %>
-        </div>
-    </div>
+        <%= render partial: '/likes/like', locals: {article: @article, like: @like} %>
+      </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
     </div>

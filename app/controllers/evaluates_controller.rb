@@ -3,8 +3,8 @@ class EvaluatesController < ApplicationController
   before_action :set_evaluate, only: [:show, :edit, :update, :destroy]
 
   def index
-
-
+     @article = Article.find(params[:article_id])
+     @evaluates = @article.evaluates.where.not(user_id:@article.user_info.id)
   end
 
   def show

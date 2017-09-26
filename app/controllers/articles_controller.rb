@@ -7,16 +7,21 @@ class ArticlesController < ApplicationController
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
+    a =[]
     if params[:user_id]
       @user = User.find(params[:user_id])
-      @articles = @user.articles
-      respond_to do |format|
-        format.js
-      end
+      @tagId="article"
+      #@userの書いた記事をマップして、@userが評価していない記事を a[]に収納する
+      @user.articles.map{|article| a << article if article.evaluates.where(user_id: article.user_info.id).blank?}
+
+      @is_msg = a.length == 0
     else
-      #binding.pry
-      @articles = Article.all
+      @user = User.find(params[:uid])
+      @tagId="evaluate"
+      #形式を合わせるためにaに収納
+      a = @user.articles_evaluated
     end
+    @articles = a
   end
 
   def show

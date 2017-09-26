@@ -140,7 +140,7 @@ body{overflow-x: hidden;}
 .articleList{
   &_header{padding-top:10px;}
   &_footer{border-bottom: 1px solid gainsboro;padding-bottom: 10px;}
-  &-picture{}
+  &-picture{min-height: 90px!important;}
   &-dateTime{
     text-align:right;
     font-size:80%;
@@ -192,6 +192,7 @@ body{overflow-x: hidden;}
 //記事詳細 & 修正画面　表示用クラス
 //Bootstrap既存クラスのオーバーライド
 
+
 .articleDetail{
   &-picture{
     padding-bottom:20px;
@@ -215,13 +216,17 @@ body{overflow-x: hidden;}
   }
   &-buttons{
     text-align: center;
+    &_someoneEvaluate{
+      margin-top:-20px;
+      text-align:right;
+    }
   }
   &-dataTable{
       tr > th{
         width:120px;
       }
     &_divider{
-      padding:0px;
+      padding:0px !important;
       height: 1px;
     }
   }
@@ -262,8 +267,9 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   &-field{display: none!important;}
   &-table{
   }
-  &-tableTitle{width:150px;}
+  &-tableTitle{width:120px;}
 }
+//評価で使用している☆の設定
 .input-range {
 
 }
@@ -285,4 +291,45 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
 .range-group > a.on:before {
   content: "★";
   color: #fc3;
+}
+//TOPページの表
+.topTable{
+  th {background-color:ghostwhite;}
+  td {
+    width:120px;
+    &.date{width:100px;}
+    &.name{@include ellipsis;}
+    &.place{@include ellipsis;}
+    &.point{@include ellipsis;}
+    &.dateTime{width:170px;}
+  }
+}
+//ログイン前の最初のページ
+.landingPage{
+  &-img{
+    width: 100%;
+    position: absolute;
+    // top:0px;
+     left:0px;
+    z-index: -1;
+  }
+  .siteTitle{
+     position:relative;
+     top:50px;
+     color:#FFF;
+     padding:0px;
+     margin:0px;
+     >h1{
+       padding:0px;
+       margin:0px;
+       @include fz_vw(16);
+     }
+     >p.lead{
+       padding:0px;
+       margin:0px;
+       margin-top:20px;
+       margin-left:20px;
+       @include fz_vw(7);
+     }
+  }
 }

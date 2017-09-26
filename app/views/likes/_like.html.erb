@@ -1,23 +1,21 @@
-<% if user_signed_in? %>
-<%binding.pry %>
-  <% if @article.like_user(current_user.id) %>
-    <%= button_to article_likes_path(like, article_path: article.id), method: :delete, id: "like-button", remote: true do %>
-      はーと１
-      <span>
-        <%#= tweet.like_count %>
-      </span>
-    <% end %>
+<div class="articleDetail-like" id="likeForm">
+  <h3>いいね件数: <%= article.likes.count %></h3>
+  <% if current_user.already_liked?(article) %>
+    <%= button_to 'いいねを取り消す', article_like_path(article,article.likes), method: :delete,remote:true %>
   <% else %>
-    <%= button_to article_likes_path(article), id: "like-button", remote: true do %>
-        はーと２
-      <span>
-        <%#= tweet.like_count %>
-      </span>
+    <%= form_for [article, like],remote:true do |f| %>
+      <% if like.errors.any? %>
+        <% like.errors.full_messages.each do |msg| %>
+          <li style="color: red;"><%= msg %></li>
+        <% end %>
+      <% end %>
+      <%= f.submit 'いいね！' %>
     <% end %>
   <% end %>
-<% else %>
-    はーと２
-    <span>
-      <%#= tweet.like_count %>
-    </span>
-<% end %>
+</div>
+<h2>この記事にいいねしたユーザー</h2>
+<div class="articleDetail-like like-users">
+  <% article.liked_users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</div>
