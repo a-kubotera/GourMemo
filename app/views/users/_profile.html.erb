@@ -2,6 +2,11 @@
   <div class="col-md-12">
     <p id="defAvater"><%= profile_img(@user,"imageSize_myPage") if profile_img(@user) %></p>
   </div>
+  <% not_login_user?(@user.id) do %>
+    <div class="col-xs-12 userForm-follow">
+      <%= render partial: 'follow_form', locals: { user: @user } if signed_in?   %>
+    </div>
+  <% end %>  
 </div>
 <div class="col-xs-8 userForm userForm-name">
   <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
@@ -29,8 +34,3 @@
   <p class="userForm-title">プロフィール</p>
   <div class="well well-sm userForm-br"><%= @user.profile%></div>
 </div>
-<% not_login_user?(@user.id) do %>
-  <div class="col-xs-12 userForm-follow">
-    <%= render partial: 'follow_form', locals: { user: @user } if signed_in?   %>
-  </div>
-<% end %>

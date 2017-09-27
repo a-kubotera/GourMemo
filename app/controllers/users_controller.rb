@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
   def show
     # binding.pry
     @page_title = "ユーザー情報"

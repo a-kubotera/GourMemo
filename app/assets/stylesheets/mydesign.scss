@@ -122,6 +122,9 @@ body{overflow-x: hidden;}
     top:0px;
     margin-bottom: 0px;
   }
+  &-follow {
+    text-align: center;
+  }
   &-form {
 
   }
@@ -226,10 +229,11 @@ body{overflow-x: hidden;}
     }
   }
   &-buttons{
-    text-align: center;
+    text-align: right;
+    margin-top:-10px;
+    margin-bottom:10px;
     &_someoneEvaluate{
-      margin-top:-20px;
-      text-align:right;
+      margin-bottom: 0px;
     }
   }
   &-dataTable{
@@ -292,6 +296,11 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   &-table{
   }
   &-tableTitle{width:120px;}
+  &-buttons{
+    text-align: center;
+    margin-top:-30px;
+    padding-bottom: 10px;
+  }
 }
 //評価で使用している☆の設定
 .input-range {
@@ -316,6 +325,12 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   content: "★";
   color: #fc3;
 }
+//Helper用の☆設定
+.stars{
+  &_on{color: #fc3;}
+  &_off{color: #aaa;}
+}
+
 //TOPページの表
 .topTable{
   th {background-color:ghostwhite;}

@@ -1,6 +1,5 @@
 <div class="modal-dialog">
   <div class="modal-content">
-
     <div class="modal-header">
       <% if @evaluates.blank? %>
         他の人の評価はありません
@@ -10,7 +9,6 @@
             <strong><Tips></strong><%=@evaluates.count %>人がこのお店を評価してます
           </div>
         </div>
-        <h2></h2>
         <% @evaluates.each do |eva| %>
           <div class="panel panel-success">
             <div class="panel-heading">
@@ -41,6 +39,11 @@
               <div class="panel panel-default">
                 <div class="panel-body articleDetail-comment"><%= eva.eva_comment%></div>
               </div>
+            </div>
+            <div class="evaluate-buttons">
+              <% if your_article?(eva) %>
+                <%= link_to edit_article_evaluate_path(article_id:@article.id,id:eva.id),remote:true ,class:"btn btn-primary" do %>評価を更新する<% end %>
+              <% end %>
             </div>
           </div>
         <% end %>

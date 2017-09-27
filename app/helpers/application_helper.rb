@@ -31,12 +31,12 @@ module ApplicationHelper
     end
   end
 
-  #あなたがこの記事をLikeしているかどうかの判定
+  #あなた(LoginUser)がこの記事をLikeしているかどうかの判定
   #@articleは省略可能
   def are_you_like?(article = @article)
     article.liked_users.where(id:current_user.id).present?
   end
-  #すでにこの記事を評価したかどうか？
+  #あなたがすでにこの記事を評価したかどうか？
   def already_evaluated_it?(article = @article)
     article.evaluates.where(user_id:current_user.id).present?
   end
@@ -44,4 +44,13 @@ module ApplicationHelper
   def your_article?(article = @article)
     article.user_info.id == current_user.id
   end
+
+  #evaluateを受け取り、☆で返すViewヘルパー
+  def ret_Stars(point)
+    #準備中
+    #http://cortyuming.hateblo.jp/entry/2017/03/22/131457
+    #https://qiita.com/EastResident/items/59856cbc7d8e73138a49
+
+  end
+
 end

@@ -68,6 +68,19 @@
               </div>
             </div>
           <% end %>
+          <div class="articleDetail-buttons">
+            <% login_user?(@article.user_info.id) do %>
+              <%= link_to edit_article_path(@article.id) ,class:"btn btn-warning" do %>内容を修正する
+              <% end %>
+            <% end %>
+            <% if your_article? || are_you_like? %>
+              <% unless already_evaluated_it? %>
+                <%= link_to new_article_evaluate_path(article_id:@article.id),remote:true,class:"btn btn-primary" do %>お店を評価する
+                <% end %>
+              <% end %>
+            <%end%>
+
+          </div>
           <div class="panel panel-info">
             <div class="panel-heading">
               <h3 class="panel-title">詳細情報</h3>
@@ -101,20 +114,6 @@
               </div>
             </div>
           </div>
-          <div class="articleDetail-buttons">
-            <% login_user?(@article.user_info.id) do %>
-              <%= link_to edit_article_path(@article.id) ,class:"btn btn-warning" do %>内容を修正する
-              <% end %>
-            <% end %>
-
-            <% if your_article? || are_you_like? %>
-              <% unless already_evaluated_it? %>
-                <%= link_to new_article_evaluate_path(article_id:@article.id),remote:true,class:"btn btn-primary" do %>お店を評価する
-                <% end %>
-              <% end %>
-            <%end%>
-
-          </div>
         </div>
       </div>
     <div class="modal-footer">
@@ -122,4 +121,3 @@
     </div>
   </div>
 </div>
-<div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

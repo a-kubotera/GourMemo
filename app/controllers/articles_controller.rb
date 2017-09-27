@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def index
     a =[]
+
     if params[:user_id]
       @user = User.find(params[:user_id])
       @tagId="article"
@@ -31,7 +32,6 @@ class ArticlesController < ApplicationController
 
   def show
     @like = Like.new() # 追記
-
     @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
     #イイねした人だけが評価できる
     #@likesEvaluate =  @article.likes.where(user_id:current_user.id)

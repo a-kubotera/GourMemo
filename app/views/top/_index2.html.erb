@@ -4,9 +4,7 @@
       <div class="bs-component">
         <ul class="nav nav-tabs" >
           <li><p class="userForm-pageTitle"><%=@page_title %></p></li>
-
           <li class="news active"><a href="#News" data-toggle="tab">What's New</a></li>
-
           <li class="profile"><%= link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do %>プロフィール<%end%></li>
           <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>投稿記事<%end%></li>
           <li class="evaluate"><%= link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>評価済み一覧<%end%></li>
@@ -51,15 +49,7 @@
             <% key = "danger"  if key == "alert" %>
             <%= content_tag :div, value, class: "alert alert-#{key}" %>
           <% end %>
-          <% login_user?(@user.id) do %>
-            <%= link_to new_article_path ,remote: true do %>
-              <i class="glyphicon glyphicon-gift" aria-hidden="true">
-                <span style="margin-left:-15px;">投稿する</span>
-              </i>
-            <% end %>
-          <% end %>
           <h4>〜<%=@user.name%>さんの更新情報〜</h4>
-
           <table class="table table-striped table-hover topTable">
             <thead>
               <tr>
@@ -72,11 +62,17 @@
             </thead>
             <tbody>
               <% @articles.each do |f| %>
+
                   <tr>
                     <td class="dateTime"><%= f.updated_at.strftime("%y/%m/%d %H:%M:%S")%></td>
                     <td class="name"><%= f.name%></td>
                     <td class="plase"><%= f.station%></td>
-                    <td class="point"></td>
+                    <td class="point">
+                      <% unless f.evaluates.where(user_id:f.user_info.id).blank? %>
+                      <% @point = f.evaluates.where(user_id:f.user_info.id).first.evaluate %>
+                      <span style="color: #fc3;"><% @point.times{ %>★<%} %></span><span style="color: #aaa;"><% (5 - @point).times{ %>☆<%} %></span>
+                      <% end %>
+                    </td>
                     <td class="date"><%= f.created_at.strftime("%y/%m/%d")%></td>
                   </tr>
               <% end %>
