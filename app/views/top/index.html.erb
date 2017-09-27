@@ -1,6 +1,13 @@
 <div class="container landingPage">
   <%= image_tag 'bg.jpg',class:"landingPage-img"%>
   <div class="row">
+    <% flash.each do |key, value| %>
+      <div class="col-xs-12" style="padding-top:20px;padding-bottom:20px;">
+        <% key = "success" if key == "notice" %>
+        <% key = "danger"  if key == "alert" %>
+        <%= content_tag :div, value, class: "alert alert-#{key}" %>
+      </div>
+    <% end %>    
     <div class="siteTitle col-xs-12">
       <h1>GourMemo</h1>
       <p class="lead">
@@ -8,5 +15,6 @@
         　　　　　気になったお店を登録しておこう！
       </p>
     </div>
+
   </div>
 </div>
