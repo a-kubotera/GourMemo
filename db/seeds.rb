@@ -1,15 +1,18 @@
 #テストデータをすべて削除
+Like.delete_all
+Relationship.delete_all
 User.delete_all
 Article.delete_all
 Evaluate.delete_all
-Like.delete_all
 
 
 def time_rand from = Time.local(0), to = Time.now
     Time.at(rand(from.to_f..to.to_f))
 end
 
+id = 0
 30.times do
+  id += 1
   Faker::Config.locale = :ja
   @gimei = Gimei.new
   email = Faker::Internet.email
@@ -19,7 +22,7 @@ end
   profile = Faker::Lorem.sentence
   password = "password"
   provider = "provider"
-  uid = rand(1000)
+  uid = id
   #
 
   @user = User.create!(

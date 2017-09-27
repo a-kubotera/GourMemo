@@ -1,16 +1,30 @@
-<% if @is_msg %>
+<% if @is_ArtCnt %>
   <div class="bs-component">
     <div class="alert alert-dismissible alert-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Tips</strong>
       現在、未評価のものはありません。<br>
+      <% login_user?(@user.id) do %>
       <br>
       行ってみたいお店や、テレビや雑誌で見て気になるお店はありませんか？<br>
       新しいお店を見つけたら<%= link_to new_article_path ,remote: true do %>登録してみましょう！<%end %>
+      <% end %>
     </div>
   </div>
+<% elsif @is_EvaCnt %>
+    <div class="bs-component">
+      <div class="alert alert-dismissible alert-info">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Tips</strong>
+        評価した記事がありません。<br>
+        <% login_user?(@user.id) do %>
+        <br>
+        気になるお店を登録したり、他の人が登録したお店に実際に行き、<br>
+        評価を登録してみましょう。<br>
+        <% end %>
+      </div>
+    </div>
 <% end %>
-
 <% articles.each do |article| %>
   <div class="articleList">
     <div class="articleList_header row"></div>

@@ -4,9 +4,10 @@ class CreateEvaluates < ActiveRecord::Migration
       t.datetime :date                 #評価した日
       t.integer  :evaluate    ,null: false, default: 0         #評価（ポイント制）
       t.text     :eva_comment                                   #コメント
-      t.integer  :user_id                                       #評価者
-      t.integer  :article_id                                    #記事ID
+      t.integer  :user_id       ,null: false                                #評価者
+      t.integer  :article_id    ,null: false                               #記事ID
       t.timestamps null: false
     end
+    add_index :evaluates, [:user_id, :article_id], unique: true
   end
 end

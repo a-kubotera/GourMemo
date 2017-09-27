@@ -27,6 +27,11 @@
             </tr>
             <tr><th colspan="2" class="articleDetail-dataTable_divider"></th></tr>
           </table>
+          <% not_login_user?(@article.user_info.id) do%>
+            <div class="articleDetail-likes" style="display:">
+              <%= render partial: '/likes/like', locals: {article: @article, like: @like} %>
+            </div>
+          <% end %>
             <% unless @evaluate.blank? %>
             <div class="panel panel-danger">
               <div class="panel-heading">
@@ -57,7 +62,7 @@
                     <div class="articleDetail-buttons_someoneEvaluate"><%= link_to article_evaluates_path(article_id:@article.id),remote:true  do %>他の人の評価<% end %></div>
                   <% end %>
                   <% if @article.user_info.id == current_user.id %>
-                    <%= link_to edit_article_evaluate_path(article_id:@article.id,id:@evaluate.id),remote:true ,class:"btn btn-warning" do %>評価を修正する<% end %>
+                    <%= link_to edit_article_evaluate_path(article_id:@article.id,id:@evaluate.id),remote:true ,class:"btn btn-primary" do %>評価を更新する<% end %>
                   <% end %>
                 </div>
               </div>
@@ -97,19 +102,20 @@
             </div>
           </div>
           <div class="articleDetail-buttons">
-            <% if @article.user_info.id == current_user.id %>
+            <% login_user?(@article.user_info.id) do %>
               <%= link_to edit_article_path(@article.id) ,class:"btn btn-warning" do %>内容を修正する
               <% end %>
             <% end %>
-            <% if @evaluate.blank? %>
-              <%= link_to new_article_evaluate_path(article_id:@article.id),remote:true,class:"btn btn-primary" do %>お店を評価する
+
+            <% if your_article? || are_you_like? %>
+              <% unless already_evaluated_it? %>
+                <%= link_to new_article_evaluate_path(article_id:@article.id),remote:true,class:"btn btn-primary" do %>お店を評価する
+                <% end %>
               <% end %>
             <%end%>
+
           </div>
         </div>
-      </div>
-      <div class="articleDetail-like" style="display:">
-        <%= render partial: '/likes/like', locals: {article: @article, like: @like} %>
       </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>

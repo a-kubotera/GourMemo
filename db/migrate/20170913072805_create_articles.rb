@@ -10,7 +10,7 @@ class CreateArticles < ActiveRecord::Migration
       t.text    :station                                     #最寄り駅(いずれ別テーブルに)
       t.text    :art_comment                                 #コメント
       t.text    :source                                      #情報の出どころ
-      t.integer :user_id                                     #UserID
+      t.integer :user_id ,null: false                              #UserID
       #t.integer :evaluate_id                                #評価IDは削除
       t.timestamps null: false
     end

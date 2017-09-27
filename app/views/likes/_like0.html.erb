@@ -1,0 +1,28 @@
+<div class="likes" id="likeForm">
+  <h3>いいね件数: <%= article.likes.count %></h3>
+  <% if current_user.already_liked?(article) %>
+    <%= button_to  article_like_path(article,article.likes),class:"likes-button likes-button_dislike" ,method: :delete,remote:true  do %>
+      <i class="fa fa-ban" aria-hidden="true"></i>いいねを取り消す
+    <% end %>
+  <% else %>
+    <%= form_for [article, like],remote:true do |f| %>
+      <% if like.errors.any? %>
+        <% like.errors.full_messages.each do |msg| %>
+          <li style="color: red;"><%= msg %></li>
+        <% end %>
+      <% end %>
+      <button type="submit" class="likes-button likes-button_like">
+        <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+        イイね！
+      </button>
+    <% end %>
+  <% end %>
+</div>
+
+
+<h2>この記事にいいねしたユーザー</h2>
+<div class="articleDetail-like like-users">
+  <% article.liked_users.each do |user| %>
+    <li><%= user.email %></li>
+  <% end %>
+</div>

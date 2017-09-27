@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     top_path
   end
 
-
   protected
 
     def configure_permitted_parameters

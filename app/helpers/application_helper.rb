@@ -1,7 +1,7 @@
 module ApplicationHelper
   def profile_img(user,avatarSize = "sizeDef")
     return image_tag(user.avatar, alt: user.name,class:avatarSize) if user.avatar?
-    unless user.provider.blank?
+    if user.image_url.present?
       img_url = user.image_url
     else
       img_url = 'no_image.png'
@@ -18,10 +18,30 @@ module ApplicationHelper
     image_tag(img_url, alt: name,class:size)
   end
 
-#引数(ID)がログインユーザーか調べる
+#引数(ID)がログインユーザーの場合だけ、do ~ end　を表示する。
   def login_user?(userid)
     if userid == current_user.id
       yield
     end
+  end
+  #引数(ID)がログインユーザーの場合だけ、do ~ end　を表示する。
+  def not_login_user?(userid)
+    unless userid == current_user.id
+      yield
+    end
+  end
+
+  #あなたがこの記事をLikeしているかどうかの判定
+  #@articleは省略可能
+  def are_you_like?(article = @article)
+    article.liked_users.where(id:current_user.id).present?
+  end
+  #すでにこの記事を評価したかどうか？
+  def already_evaluated_it?(article = @article)
+    article.evaluates.where(user_id:current_user.id).present?
+  end
+  #この記事はあなたが書いたの？
+  def your_article?(article = @article)
+    article.user_info.id == current_user.id
   end
 end

@@ -37,29 +37,29 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade active in col-xs-12" id="base">
-          <div class="col-xs-12 userForm userForm_email">
+          <div class="col-xs-12 userForm userForm-email">
             <p class="userForm-icon"><%= material_icon.mail.md_18 %></p>
             <p class="userForm-title"><%= f.label :email %></p>
             <p class="userForm-form"><%= f.email_field :email, autofocus: true, class: 'form-control' %></p>
           </div>
           <% if @user.provider.blank? %>
-            <div class="col-xs-12 userForm userForm_password">
+            <div class="col-xs-12 userForm userForm-password">
               <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
               <p class="userForm-title">新しいパスワード (<%= @minimum_password_length %>文字以上)</p>
               <p class="userForm-form"><%= f.password_field :password, autocomplete: "off", class: 'form-control' %></p>
             </div>
-            <div class="col-xs-12 userForm userForm_password">
+            <div class="col-xs-12 userForm userForm-password">
               <p class="userForm-icon"><%= material_icon.vpn_key.md_18 %></p>
               <p class="userForm-title"><%= f.label :password_confirmation %></p>
               <p class="userForm-form"><%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %></p>
             </div>
           <% else %>
-          <div class="col-xs-12 userForm userForm_password">
+          <div class="col-xs-12 userForm userForm-password">
             <p class="userForm-icon text-muted"><%= material_icon.vpn_key.md_18 %></p>
             <p class="userForm-title text-muted">新しいパスワード (<%= @minimum_password_length %>文字以上)</p>
             <p class="userForm-form"><input class="form-control" id="disabledInput" type="text" placeholder="SNS login users do not need a password ..." disabled=""></p>
           </div>
-          <div class="col-xs-12 userForm userForm_password">
+          <div class="col-xs-12 userForm userForm-password">
             <p class="userForm-icon text-muted"><%= material_icon.vpn_key.md_18 %></p>
             <p class="userForm-title text-muted"><%= f.label :password_confirmation %></p>
             <p class="userForm-form"><input class="form-control" id="disabledInput" type="text" placeholder="SNS login users do not need a password ..." disabled=""></p>
@@ -67,7 +67,7 @@
           <% end%>
         </div>
         <div class="tab-pane fade col-xs-12" id="profile">
-          <div class="col-xs-4 userForm userForm_avater">
+          <div class="col-xs-4 userForm userForm-avater">
             <div class="col-md-12">
               <p id="defAvater"><%= profile_img(@user,"avatarSize--myPage") if profile_img(@user) %></p>
               <p class="preview"></p>
@@ -85,22 +85,22 @@
               <%= f.hidden_field :avatar_cache %>
             </div>
           </div>
-          <div class="col-xs-8 userForm userForm_name">
+          <div class="col-xs-8 userForm userForm-name">
             <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
             <p class="userForm-title"><%= f.label :name %></p>
             <p class="userForm-form"><%= f.text_field :name, autofocus: true, class: 'form-control' %></p>
           </div>
-          <div class="col-xs-8 userForm userForm_address">
+          <div class="col-xs-8 userForm userForm-address">
             <p class="userForm-icon"><%= material_icon.person_pin.md_18 %></p>
             <p class="userForm-title"><%= f.label :address %></p>
             <p class="userForm-form"><%= f.text_field :address, autofocus: true, class: 'form-control' %></p>
           </div>
-          <div class="col-xs-8 userForm userForm_age">
+          <div class="col-xs-8 userForm userForm-age">
             <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
             <p class="userForm-title"><%= f.label :age %></p>
             <p class="userForm-form"><%= f.number_field :age,autofocus: true, class: 'form-control' %></p>
           </div>
-          <div class="col-xs-12 userForm userForm_profile">
+          <div class="col-xs-12 userForm userForm-profile">
             <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
             <p class="userForm-title"><%= f.label :profile %></p>
             <p class="userForm-form"><%= f.text_area :profile,autofocus: true, class: 'form-control' %></p>

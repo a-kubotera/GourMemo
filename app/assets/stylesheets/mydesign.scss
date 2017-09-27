@@ -96,10 +96,10 @@ body{overflow-x: hidden;}
     padding-right: 15px;
     padding-left: 5px;
   }
-  &_password{
+  &-password{
     padding-bottom: 0px;
   }
-  &_avater{
+  &-avater{
     margin-top:15px;
     margin-bottom:5px;
     padding:0px !important;
@@ -169,11 +169,7 @@ body{overflow-x: hidden;}
       padding:5px 10px;
     }
     &_like{
-      position: relative;
-      right:8px;
-      .nav > li > a{
-        padding:5px 10px;
-      }
+      >ul>li >a{padding:6px;}
     }
   }
   &_fontMinimum{
@@ -195,7 +191,7 @@ body{overflow-x: hidden;}
 
 .articleDetail{
   &-picture{
-    padding-bottom:20px;
+    padding-bottom:15px;
     text-align: center;
     &_button{padding-top:5px;}
   }
@@ -222,6 +218,7 @@ body{overflow-x: hidden;}
     }
   }
   &-dataTable{
+      margin-bottom: 10px !important;
       tr > th{
         width:120px;
       }
@@ -230,15 +227,27 @@ body{overflow-x: hidden;}
       height: 1px;
     }
   }
-
+  &-likes{
+    text-align: right;
+    padding-bottom:10px;
+  }
 }
+//Like関連
+.likes{
+  &-button{
+    &_like{}
+    &_dislike{}
+  }
+}
+
+
 
 //アバター等の画像調整サイズ
 img{//Helperに渡すavatar用クラス　すべてimg限定
   &.imageSize{
     &_myPage{
       width:200px!important;
-        height:auto;
+      height:auto;
     }
     &_myPageShow{
         max-width:150px!important;
@@ -332,4 +341,9 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
        @include fz_vw(7);
      }
   }
+}
+
+//フォームのエラーメッセージ
+.errorMsg{
+  &_position{position:relative;top:-40px;}
 }

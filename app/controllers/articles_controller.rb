@@ -14,18 +14,24 @@ class ArticlesController < ApplicationController
       #@userの書いた記事をマップして、@userが評価していない記事を a[]に収納する
       @user.articles.map{|article| a << article if article.evaluates.where(user_id: article.user_info.id).blank?}
 
-      @is_msg = a.length == 0
-    else
+      @is_ArtCnt = a.length == 0
+    elsif params[:uid]
       @user = User.find(params[:uid])
       @tagId="evaluate"
       #形式を合わせるためにaに収納
       a = @user.articles_evaluated
+      @is_EvaCnt = a.length == 0
+    else
+      @q        = Article.search(params[:q])
+      @q.sorts = 'id asc'
+      a = @q.result(distinct: true)
     end
     @articles = a
   end
 
   def show
     @like = Like.new() # 追記
+
     @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
     #イイねした人だけが評価できる
     #@likesEvaluate =  @article.likes.where(user_id:current_user.id)

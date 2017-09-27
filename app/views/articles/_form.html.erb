@@ -14,17 +14,16 @@
     <%= form_for(@article) do |f| %>
       <div class="panel-body">
         <% if @article.errors.any? %>
-          <section class="wow fadeInDownBig" data-wow-duration="1s" data-wow-iteration="1">
-            <div class="message message_error">
-              <h2>入力内容にエラーがあります。</h2>
-              以下の<%= @article.errors.count %>個のエラーを修正してください。
-              <ul>
-                <% @article.errors.full_messages.each do |message| %>
+          <div class="alert alert-dismissible alert-danger errorMsg　errorMsg_possiton" style="">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h2 style="display:inline">入力内容にエラーがあります。</h2>
+            <p>以下の<%= @article.errors.count %>個のエラーを修正してください。</p>
+            <ul>
+              <% @article.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          </section>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
         <%# 複数登録し、スライド式にしたい！%>
         <div class="articleDetail-picture col-xs-12">
@@ -41,6 +40,7 @@
             <i class="glyphicon glyphicon-camera" aria-hidden="true">
               <span>写真を選ぶ</span>
             <%= f.file_field :picture,style: "display:none;" %>
+            <%= f.hidden_field :picture_cache %>
           </i>
           <% end %>
           </div>

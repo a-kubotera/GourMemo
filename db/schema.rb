@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20170917082622) do
     t.text     "station"
     t.text     "art_comment"
     t.text     "source"
-    t.integer  "user_id"
+    t.integer  "user_id",                  null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
@@ -35,11 +35,13 @@ ActiveRecord::Schema.define(version: 20170917082622) do
     t.datetime "date"
     t.integer  "evaluate",    default: 0, null: false
     t.text     "eva_comment"
-    t.integer  "user_id"
-    t.integer  "article_id"
+    t.integer  "user_id",                 null: false
+    t.integer  "article_id",              null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  add_index "evaluates", ["user_id", "article_id"], name: "index_evaluates_on_user_id_and_article_id", unique: true, using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "article_id", null: false
@@ -81,14 +83,15 @@ ActiveRecord::Schema.define(version: 20170917082622) do
     t.integer  "age"
     t.text     "profile"
     t.string   "avatar"
-    t.string   "uid"
-    t.string   "provider"
+    t.string   "uid",                    default: "", null: false
+    t.string   "provider",               default: "", null: false
     t.string   "image_url"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "likes", "articles"
   add_foreign_key "likes", "users"
