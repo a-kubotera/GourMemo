@@ -154,19 +154,19 @@ body{overflow-x: hidden;}
     @include ellipsis;
   }
   &-contributor{
+    text-align:left;
     font-size:50%;
     @include ellipsis;
   }
   &-button{
     margin-top:5px;
-      >span{
+    text-align: left;
         >a{
         color:#FFFFFF;
         text-decoration: none !important;
         }
-      }
     &_delete{
-      padding:5px 10px;
+      padding:5px 5px;
     }
     &_like{
       >ul>li >a{padding:6px;}
@@ -180,7 +180,22 @@ body{overflow-x: hidden;}
     font-size:120%;
     margin:0px;
   }
-  //&-picture{}
+  &-search{
+    text-align: left;
+    border: 1px solid #FFF;
+    border-radius: 10px;
+    background: #FFF;
+    padding:10px;
+    margin-bottom: 10px;
+    padding-top:20px;
+  }
+  &-searchForm{
+
+  }
+  &-serchButton{
+    position: relative;
+    top:30px;
+  }
 }
 #like_none{background: silver;
   .badge{color:gray;}

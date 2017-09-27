@@ -28,7 +28,7 @@
 <% articles.each do |article| %>
   <div class="articleList">
     <div class="articleList_header row"></div>
-    <div class="row">
+    <div class="articleList_body row">
       <div class="articleList-picture col-xs-2">
         <%= set_picture(article.picture,"imageSize_indexArticle","test") %>
       </div>
@@ -46,17 +46,6 @@
     </div>
     <div class="articleList_footer row">
       <div class="col-xs-3">
-        <% if article.user_info.id != article.user_info.id %>
-          <div class="articleList-contributor">
-            <p class="text-muted articleList_fontMinimum">
-              ~recommended by
-            </p>
-            <%= link_to user_path(id:article.user_info.id) do %>
-              <%= profile_img(article.user_info,"imageSize_indexAvatar") %>
-              <%= article.user_info.name %>
-            <% end %>
-          </div>
-        <% else %>
           <div class="articleList-button articleList-button_like">
             <ul class="nav nav-pills">
               <li class="active">
@@ -67,29 +56,26 @@
               </li>
             </ul>
           </div>
-        <% end %>
       </div>
+
       <div class="col-xs-7">
         <%# 何を入れようか・・ %>
       </div>
-      <% login_user?(article.user_info.id) do %>
-        <div class="col-xs-2 articleList-button articleList-button_delete label-danger">
-          <span>
-            <% if article.evaluates.count > 0 || article.likes.count > 0
-              @deleteWarning="<br>この記事は<p class='text-danger'>"
-               if article.likes.count> 0
-                 @deleteWarning +="● #{article.likes.count}人が注目しています。<br>"
-               end
-               if article.evaluates.count > 0
-                 @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
-               end
-               @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
+      <% if your_article?(article) %>
+        <div class="articleList-button col-xs-2">
+          <% if article.evaluates.count > 0 || article.likes.count > 0
+            @deleteWarning="<br>この記事は<p class='text-danger'>"
+             if article.likes.count> 0
+               @deleteWarning +="● #{article.likes.count}人が注目しています。<br>"
+             end
+             if article.evaluates.count > 0
+               @deleteWarning +="● #{article.evaluates.count}人が評価しています。<br>"
+             end
+             @deleteWarning +="<br>記事を削除すると、これらの情報も一緒に消えてしまいます。</p>"
             else
               @deleteWarning ="<br>"
-            end
-            %>
-
-            <%= link_to article_path(id:article.id), method: :delete, data: { confirm:
+            end %>
+            <%= link_to article_path(id:article.id), method: :delete,class:"articleList-button_delete btn btn-danger", data: { confirm:
               "本当にこの記事を削除してもよろしいでしょうか？<br>
               #{@deleteWarning}
               確認のため下記の文字列を入力してください。<br>
@@ -100,7 +86,16 @@
               },
               title: "記事の削除" do %><i class="fa fa-trash-o fa-fw"></i> 削除する
             <% end %>
-          </span>
+        </div>
+      <% else %>
+        <div class="articleList-contributor col-xs-2">
+          <p class="text-muted articleList_fontMinimum">
+            ~recommended by
+          </p>
+          <%= link_to user_path(id:article.user_info.id) do %>
+            <%= profile_img(article.user_info,"imageSize_indexAvatar") %>
+            <%= article.user_info.name %>
+          <% end %>
         </div>
       <% end %>
     </div>
