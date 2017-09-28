@@ -14,8 +14,8 @@ class ArticlesController < ApplicationController
       @tagId="article"
       #@userの書いた記事をマップして、@userが評価していない記事を a[]に収納する
       @user.articles.map{|article| a << article if article.evaluates.where(user_id: article.user_info.id).blank?}
-
       @is_ArtCnt = a.length == 0
+      #binding.pry
     elsif params[:uid]
       @user = User.find(params[:uid])
       @tagId="evaluate"

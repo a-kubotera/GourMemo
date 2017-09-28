@@ -1,4 +1,4 @@
-<div style="min-width:800px;" class="col-xs-10  col-xs-offset-1 col-md-8 col-md-offset-2">
+
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
       <div class="bs-component">
@@ -78,12 +78,13 @@
               <% end %>
             </tbody>
           </table>
-          <% @followUserArticle.each do |f| %>
-            <% f.each do |d| %>
+
+          <%# @followUserArticle.each do |f| %>
+            <%# f.each do |d| %>
             <%# binding.pry %>
-             <%= d[1][:name] %>
-            <% end %>
-          <% end %>
+             <%#= d[1][:name] %>
+            <%# end %>
+          <%# end %>
         </div>
         <div class="tab-pane fade col-xs-12" id="profile"></div>
         <div class="tab-pane fade col-xs-12" id="article"></div>
@@ -91,5 +92,5 @@
       </div>
     </div>
   </div>
-</div>
+
 <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

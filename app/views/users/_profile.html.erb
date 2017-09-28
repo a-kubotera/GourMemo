@@ -6,7 +6,7 @@
     <div class="col-xs-12 userForm-follow">
       <%= render partial: 'follow_form', locals: { user: @user } if signed_in?   %>
     </div>
-  <% end %>  
+  <% end %>
 </div>
 <div class="col-xs-8 userForm userForm-name">
   <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
@@ -33,4 +33,14 @@
   <p class="userForm-icon"><%= material_icon.account_circle.md_18 %></p>
   <p class="userForm-title">プロフィール</p>
   <div class="well well-sm userForm-br"><%= @user.profile%></div>
+</div>
+<div class="col-xs-12 userForm-relation">
+  <section class="userForm-relation_follow">
+    <i class="fa fa-user-o" aria-hidden="true"></i>
+    <%= render partial: 'relationships/index', locals: { user: @follow, title:"フォロー"} %>
+  </section>
+  <section  class="userForm-relation_follower">
+    <i class="fa fa-user" aria-hidden="true"></i>
+    <%= render partial: 'relationships/index', locals: { user: @followed, title:"フォロワー"} %>
+  </section>
 </div>

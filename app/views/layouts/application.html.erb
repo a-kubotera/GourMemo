@@ -20,16 +20,21 @@
             <a class="navbar-brand" href="#">GourMemo</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <p class="navbar-text">ようこそ <%= signed_in?? current_user.name : 'ゲスト' %> さん</p>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <% if user_signed_in? %>
+            <% if user_signed_in? %>
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <%= link_to new_article_path,remote:true do %>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <span>お店を登録する</span>
+                  <% end %>
+                </li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu<span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
                     <li>
                       <%= link_to top_path do %>
-                      <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                      <span class="">マイページ</span>
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                        <span class="">マイページ</span>
                       <% end %>
                     </li>
                     <li>
@@ -39,48 +44,47 @@
                       <% end %>
                     </li>
                     <li>
+                      <%= link_to users_path do %>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <span class="">ユーザー検索</span>
+                      <% end %>
+                    </li>
+                    <li>
                       <%= link_to destroy_user_session_path, method: :delete do %>
                       <i class="fa fa-sign-out" aria-hidden="true"></i>
                         <span class="">サインアウト</span>
                       <% end %>
                     </li>
-                  <% else %>
-                    <li>
-                      <%= link_to new_user_session_path do %>
-                        <i class="fa fa-sign-in" aria-hidden="true"></i>
-                        <span class="">ログイン</span>
-                      <% end %>
-                    </li>
-                    <li>
-                      <%= link_to new_user_registration_path do %>
-                      <i class="fa fa-user-plus" aria-hidden="true"></i>
-                        <span class="">新規登録</span>
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
-            </ul>
-            <% if user_signed_in? %>
+                  </ul>
+                </li>
+              </ul>
+            <% else %>
               <ul class="nav navbar-nav navbar-right">
-        				<li>
-                  <%= link_to top_path do %>
-                  <i class="fa fa-address-card" aria-hidden="true"></i>
-                  <span>トップページ</span>
+                <li>
+                  <%= link_to new_user_session_path do %>
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    <span class="">ログイン</span>
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_article_path,remote:true do %>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  <span>お店を登録する</span>
+                  <%= link_to new_user_registration_path do %>
+                  <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    <span class="">新規登録</span>
                   <% end %>
                 </li>
-        			</ul>
+              </ul>
             <% end %>
+            <p class="navbar-text">ようこそ <%= signed_in?? current_user.name : 'ゲスト' %> さん</p>
           </div>
         </div>
       </nav>
     </div>
-    <%= yield %>
+    <% if request.path_info == '/' %>
+      <%= yield %>
+    <% else %>
+      <div style="min-width:800px;" class="col-xs-10 col-xs-offset-1">
+        <%= yield %>
+      </div>
+    <% end %>
   </body>
 </html>

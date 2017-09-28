@@ -137,6 +137,13 @@ body{overflow-x: hidden;}
   &-button {
     text-align: center;
   }
+  &-relation {
+    text-align: left;
+    position: relative;
+    right:20px;
+    &_follow{}
+    &_follower{}
+  }
   &_br{@include acceptBR;}
 }
 //記事一覧表示用クラス
@@ -168,11 +175,14 @@ body{overflow-x: hidden;}
         color:#FFFFFF;
         text-decoration: none !important;
         }
+    .active{width:130px;}
     &_delete{
       padding:5px 5px;
     }
     &_like{
       >ul>li >a{padding:6px;}
+      position: relative;
+      right:15px;
     }
   }
   &_fontMinimum{
@@ -199,6 +209,7 @@ body{overflow-x: hidden;}
     position: relative;
     top:30px;
   }
+
 }
 #like_none{background: silver;
   .badge{color:gray;}
@@ -287,6 +298,7 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
     &_indexAvatar{
         max-width:30px!important;
         height:auto;
+        margin-bottom: 3px;
     }
   }
 }
@@ -376,4 +388,24 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
 //フォームのエラーメッセージ
 .errorMsg{
   &_position{position:relative;top:-40px;}
+}
+
+//ユーザー一覧画面設定
+.showUser {
+  padding:5px;
+  min-width:180px;
+    &--index {
+    }
+    &_avatar{
+      img{width: 140px;
+      }
+    }
+    &_name{
+      font-size:1.2em;
+      margin:5px;
+      min-height: 1em;
+    }
+    &_email{
+      @include ellipsis;
+    }
 }

@@ -1,0 +1,8 @@
+<label><%= title %>：<%= user.length %>人</label>
+<p style="padding-bottom:3px;">
+  <% user.each do |f| %>
+    <%= link_to f do %>
+      <%= profile_img(f,"imageSize_indexAvatar") %>
+    <% end %>
+  <% end %>
+</p>

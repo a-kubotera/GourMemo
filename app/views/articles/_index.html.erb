@@ -3,7 +3,11 @@
     <div class="alert alert-dismissible alert-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Tips</strong>
-      現在、未評価のものはありません。<br>
+      <%=@user.name %>さんが登録したお店は
+       <% if @user.articles.count == 0 %> ありません。
+       <% else %> すべて評価済みです。
+       <% end %>
+       <br>
       <% login_user?(@user.id) do %>
       <br>
       行ってみたいお店や、テレビや雑誌で見て気になるお店はありませんか？<br>
@@ -12,18 +16,18 @@
     </div>
   </div>
 <% elsif @is_EvaCnt %>
-    <div class="bs-component">
-      <div class="alert alert-dismissible alert-info">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Tips</strong>
-        評価した記事がありません。<br>
-        <% login_user?(@user.id) do %>
-        <br>
-        気になるお店を登録したり、他の人が登録したお店に実際に行き、<br>
-        評価を登録してみましょう。<br>
-        <% end %>
-      </div>
+  <div class="bs-component">
+    <div class="alert alert-dismissible alert-info">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Tips</strong>
+      評価した記事がありません。<br>
+      <% login_user?(@user.id) do %>
+      <br>
+      気になるお店を登録したり、他の人が登録したお店に実際に行き、<br>
+      評価を登録してみましょう。<br>
+      <% end %>
     </div>
+  </div>
 <% end %>
 <% articles.each do |article| %>
   <div class="articleList">
@@ -46,18 +50,36 @@
     </div>
     <div class="articleList_footer row">
       <div class="col-xs-3">
-          <div class="articleList-button articleList-button_like">
-            <ul class="nav nav-pills">
-              <li class="active">
-                <% article.likes.count == 0? @lc="like_none" : @lc="" %>
-                <%= link_to "" ,id:@lc do %>
-                  <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!<span class="badge"><%= article.likes.count%></span>
-                <%end%>
-              </li>
-            </ul>
-          </div>
+        <div class="articleList-button articleList-button_like">
+          <ul class="nav nav-pills">
+            <li class="active">
+              <% if article.likes.count == 0 %>
+                <a id="like_none"><i class="fa fa-thumbs-o-up fa-fw"></i>いいね!
+                  <span class="badge">0</span>
+                  <i class="fa fa-minus" aria-hidden="true" style="font-size:55%;padding-left:2px;"></i>
+                </a>
+              <% else %>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                  <i class="fa fa-thumbs-o-up fa-fw"></i>いいね!
+                  <span class="badge"><%= article.likes.count%></span>
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <% article.likes.each do |like| %>
+                    <li>
+                      <%= link_to user_path(id:like.user.id) do %>
+                        <%= profile_img(like.user,"imageSize_indexAvatar") %>
+                        <%=like.user.name %>
+                      <% end %>
+                    </li>
+                    <%#= content_tag(:li, '', :class => 'divider') %>
+                  <% end %>
+                </ul>
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </div>
-
       <div class="col-xs-7">
         <%# 何を入れようか・・ %>
       </div>
