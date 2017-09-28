@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @articles = Article.where(user_id:@user.id).order(updated_at: :desc).limit(5)
 
     @followUserArticle = @user.followed_users.map{|user| {user_article: {name: user.name, artcles: user.articles}}}
-    @follow = @user.followers
-    @followed = @user.followed_users
+    @follow = @user.followed_users
+    @follower = @user.followers
   end
 end
