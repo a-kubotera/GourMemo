@@ -17,7 +17,11 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">GourMemo</a>
+            <%= link_to front_path,class:'navbar-brand' do %>
+            <i class="fa fa-glass" aria-hidden="true"></i>
+            GourMemo
+            <i class="fa fa-cutlery" aria-hidden="true"></i>
+            <% end %>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <% if user_signed_in? %>
@@ -74,17 +78,18 @@
                 </li>
               </ul>
             <% end %>
-            <p class="navbar-text">ようこそ <%= signed_in?? current_user.name : 'ゲスト' %> さん</p>
+            <p class="navbar-text navbar-right" style="margin-right:50px;">ようこそ <%= signed_in?? current_user.name : 'ゲスト' %> さん</p>
           </div>
         </div>
       </nav>
     </div>
-    <% if request.path_info == '/' %>
+    <% if request.path_info == '/index' || request.path_info =='/' %>
       <%= yield %>
     <% else %>
       <div style="min-width:800px;" class="col-xs-10 col-xs-offset-1">
         <%= yield %>
       </div>
     <% end %>
+    <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   </body>
 </html>

@@ -1,4 +1,3 @@
-
   <div class="panel panel-default devise-bs">
     <div class="panel-heading">
       <div class="bs-component">
@@ -7,7 +6,7 @@
           <li class="news active"><a href="#News" data-toggle="tab">What's New</a></li>
           <li class="profile"><%= link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do %>プロフィール<%end%></li>
           <li class="article"><%= link_to articles_path(user_id: @user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>投稿記事<%end%></li>
-          <li class="evaluate"><%= link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>評価済み一覧<%end%></li>
+          <li class="evaluate"><%= link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do %>評価記事一覧<%end%></li>
           <% login_user?(@user.id) do %>
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -49,7 +48,7 @@
             <% key = "danger"  if key == "alert" %>
             <%= content_tag :div, value, class: "alert alert-#{key}" %>
           <% end %>
-          <h4>〜<%=@user.name%>さんの更新情報〜</h4>
+          <h4>〜<%= your_name?(@user)%>の更新情報〜</h4>
           <table class="table table-striped table-hover topTable">
             <thead>
               <tr>

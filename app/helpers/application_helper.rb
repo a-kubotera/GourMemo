@@ -45,6 +45,14 @@ module ApplicationHelper
     article.user_info.id == current_user.id
   end
 
+  #ユーザーIDを受けて、自分の場合は「あなた」と返す
+  def your_name?(user)
+    if user.id == current_user.id
+      return 'あなた'
+    else
+      return  user.name + 'さん'
+    end
+  end
   #evaluateを受け取り、☆で返すViewヘルパー
   def ret_Stars(point)
     #準備中

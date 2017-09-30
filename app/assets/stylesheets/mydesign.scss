@@ -102,6 +102,7 @@ body{overflow-x: hidden;}
   &-avater{
     margin-top:15px;
     margin-bottom:5px;
+    text-align: center;
     padding:0px !important;
   }
   &-icon {
@@ -241,10 +242,14 @@ body{overflow-x: hidden;}
   }
   &-buttons{
     text-align: right;
-    margin-top:-10px;
+    margin-top:10px;
     margin-bottom:10px;
     &_someoneEvaluate{
-      margin-bottom: 0px;
+      height: 0px;
+      position:relative;
+      top:14px;
+      right:10px;
+      text-align: right;
     }
   }
   &-dataTable{
@@ -256,6 +261,9 @@ body{overflow-x: hidden;}
       padding:0px !important;
       height: 1px;
     }
+  }
+  &-evaluate{
+    margin-bottom: 0px !important;
   }
   &-likes{
     text-align: right;
@@ -277,6 +285,10 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   &.imageSize{
     &_myPage{
       width:200px!important;
+      height:auto;
+    }
+    &_userIndex{
+      max-width:120px!important;
       height:auto;
     }
     &_myPageShow{
@@ -356,7 +368,7 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   }
 }
 //ログイン前の最初のページ
-.landingPage{
+.topPage{
   &-img{
     width: 100%;
     position: absolute;
@@ -364,7 +376,7 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
      left:0px;
     z-index: -1;
   }
-  .siteTitle{
+  &-siteTitle{
      position:relative;
      top:50px;
      color:#FFF;
@@ -395,10 +407,6 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   padding:5px;
   min-width:180px;
     &--index {
-    }
-    &_avatar{
-      img{width: 140px;
-      }
     }
     &_name{
       font-size:1.2em;

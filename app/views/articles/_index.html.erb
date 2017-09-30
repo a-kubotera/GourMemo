@@ -3,15 +3,15 @@
     <div class="alert alert-dismissible alert-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Tips</strong>
-      <%=@user.name %>さんが登録したお店は
-       <% if @user.articles.count == 0 %> ありません。
-       <% else %> すべて評価済みです。
-       <% end %>
-       <br>
-      <% login_user?(@user.id) do %>
+      <%= your_name?(@user)%>が登録したお店は
+      <% if @user.articles.count == 0 %> ありません。
+        <% else %> すべて評価済みです。
+      <% end %>
       <br>
-      行ってみたいお店や、テレビや雑誌で見て気になるお店はありませんか？<br>
-      新しいお店を見つけたら<%= link_to new_article_path ,remote: true do %>登録してみましょう！<%end %>
+      <% login_user?(@user.id) do %>
+        <br>
+        行ってみたいお店や、テレビや雑誌で見て気になるお店はありませんか？<br>
+        新しいお店を見つけたら<%= link_to new_article_path ,remote: true do %>登録してみましょう！<%end %>
       <% end %>
     </div>
   </div>
@@ -20,7 +20,7 @@
     <div class="alert alert-dismissible alert-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <strong>Tips</strong>
-      評価した記事がありません。<br>
+      <%= your_name?(@user)%>が評価した記事がありません。<br>
       <% login_user?(@user.id) do %>
       <br>
       気になるお店を登録したり、他の人が登録したお店に実際に行き、<br>
@@ -41,7 +41,7 @@
       </div>
       <div class="articleList-title col-xs-10">
         <%= link_to article_path(id:article.id),remote:true,method: :get do %>
-          <%= article.name %><%=article.id%>
+          <%= article.name %>
         <% end %>
       </div>
       <div class="articleList-content col-xs-10">
@@ -69,7 +69,7 @@
                     <li>
                       <%= link_to user_path(id:like.user.id) do %>
                         <%= profile_img(like.user,"imageSize_indexAvatar") %>
-                        <%=like.user.name %>
+                        <%= your_name?(like.user) %>
                       <% end %>
                     </li>
                     <%#= content_tag(:li, '', :class => 'divider') %>

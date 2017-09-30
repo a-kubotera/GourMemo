@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root 'top#index'
 
   get 'index2', to: 'top#index2', as: :top
-
+  get 'index', to: 'top#index', as: :front
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
