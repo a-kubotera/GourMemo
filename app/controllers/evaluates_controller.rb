@@ -37,13 +37,13 @@ class EvaluatesController < ApplicationController
   end
 
   def update
-
+        @article = Article.find(params[:article_id])
     respond_to do |format|
       if @evaluate.update(evaluate_params)
         format.html { redirect_to top_path, notice: '評価を修正しました！' }
         format.json { render :show, status: :ok, location: @evaluate }
       else
-        @article = Article.find(params[:article_id])
+
         format.html { render :new }
         format.json { render json: @evaluate.errors, status: :unprocessable_entity }
       end

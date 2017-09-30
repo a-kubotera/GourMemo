@@ -50,9 +50,7 @@ module ApplicationHelper
     if user.id == current_user.id
       return 'あなた'
     else
-      if user.name.brank?
-        user.name = 'ゲスト'
-      end
+
       return  user.name + 'さん'
     end
   end
