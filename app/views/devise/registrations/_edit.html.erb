@@ -74,10 +74,9 @@
               <div class="input-group userForm-button" style="display:block">
                 <label class="input-group-btn" >
                   <%= f.label :avatar, class: "btn btn-primary " do%>
-                  <i class="glyphicon glyphicon-camera" aria-hidden="true">
-                    <span>写真を選ぶ</span>
-                    <%= f.file_field :avatar,style: "display:none;" %>
-                  </i>
+                  <i class="glyphicon glyphicon-camera" aria-hidden="true"></i>
+                  写真を選ぶ
+                  <%= f.file_field :avatar,style: "display:none;" %>
                   <% end %>
                 </label>
                 <input type="text" class="form-control" readonly="" id="filename" style="display:none;">
