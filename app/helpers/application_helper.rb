@@ -45,7 +45,7 @@ module ApplicationHelper
     article.user_info.id == current_user.id
   end
 
-  #ユーザーIDを受けて、自分の場合は「あなた」と返す
+  #ユーザーIDを受けて、自分の場合は「あなた」と返す 更にログイン前にゲストと返す
   def your_name?(user)
     if user.id == current_user.id
       return 'あなた'
