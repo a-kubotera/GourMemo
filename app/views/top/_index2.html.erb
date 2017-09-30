@@ -61,23 +61,21 @@
             </thead>
             <tbody>
               <% @articles.each do |f| %>
-
-                  <tr>
-                    <td class="dateTime"><%= f.updated_at.strftime("%y/%m/%d %H:%M:%S")%></td>
-                    <td class="name"><%= f.name%></td>
-                    <td class="plase"><%= f.station%></td>
-                    <td class="point">
-                      <% unless f.evaluates.where(user_id:f.user_info.id).blank? %>
-                      <% @point = f.evaluates.where(user_id:f.user_info.id).first.evaluate %>
-                      <span style="color: #fc3;"><% @point.times{ %>★<%} %></span><span style="color: #aaa;"><% (5 - @point).times{ %>☆<%} %></span>
-                      <% end %>
-                    </td>
-                    <td class="date"><%= f.created_at.strftime("%y/%m/%d")%></td>
-                  </tr>
+                <tr>
+                  <td class="dateTime"><%= f.updated_at.strftime("%y/%m/%d %H:%M:%S")%></td>
+                  <td class="name"><%= f.name%></td>
+                  <td class="plase"><%= f.station%></td>
+                  <td class="point">
+                    <% unless f.evaluates.where(user_id:f.user_info.id).blank? %>
+                    <% @point = f.evaluates.where(user_id:f.user_info.id).first.evaluate %>
+                    <span style="color: #fc3;"><% @point.times{ %>★<%} %></span><span style="color: #aaa;"><% (5 - @point).times{ %>☆<%} %></span>
+                    <% end %>
+                  </td>
+                  <td class="date"><%= f.created_at.strftime("%y/%m/%d")%></td>
+                </tr>
               <% end %>
             </tbody>
           </table>
-
           <%# @followUserArticle.each do |f| %>
             <%# f.each do |d| %>
             <%# binding.pry %>

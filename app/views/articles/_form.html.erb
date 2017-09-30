@@ -1,97 +1,98 @@
 <div class="modal-dialog">
   <div class="modal-content">
-    <div class="modal-header">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <% if @article.id.blank? %>
-          <h3 class="panel-title">新規登録</h3>
-          <% else %>
-          <h3 class="panel-title">~修正画面~ 投稿ID：<%=@article.id %> / 投稿者名：<%=@article.user_info.name %></h3>
-          <% end %>
-        </div>
-     </div>
-   </div>
     <%= form_for(@article) do |f| %>
-      <div class="panel-body">
-        <% if @article.errors.any? %>
-          <div class="alert alert-dismissible alert-danger errorMsg　errorMsg_possiton" style="">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <h2 style="display:inline">入力内容にエラーがあります。</h2>
-            <p>以下の<%= @article.errors.count %>個のエラーを修正してください。</p>
-            <ul>
-              <% @article.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <%# 複数登録し、スライド式にしたい！%>
-        <div class="articleDetail-picture col-xs-12">
-          <div class="preview"></div>
-          <% unless @article.picture.blank? %>
-            <div class="img">
-              <div class="thumbnail" id="thumbnail">
-                <%=  set_picture(@article.picture,"imageSize_detailArticle","PostPicture") %>
-              </div>
-            </div>
-          <% end %>
-          <div class="articleDetail-picture_button">
-          <%= f.label :picture, class: "btn btn-primary " do%>
-            <i class="glyphicon glyphicon-camera" aria-hidden="true">
-              <span>写真を選ぶ</span>
-            <%= f.file_field :picture,style: "display:none;" %>
-            <%= f.hidden_field :picture_cache %>
-          </i>
-          <% end %>
-          </div>
-        </div>
-        <table class="table table-striped table-hover articleDetail-dataTable">
-          <tr>
-            <th>お店の名前</th>
-            <td><%= f.text_field :name,id:"name",class:"articleDetail-imput" %></td>
-          </tr>
-          <tr>
-            <th>お店の場所</th>
-            <td><%= f.text_field :station,id:"station",class:"articleDetail-imput" %></td>
-          </tr>
-          <tr>
-            <th>コメント</th>
-            <td><%= f.text_area :art_comment, autofocus: true,id:"art_comment",class:"articleDetail-imput articleDetail-imput_textArea" %></td>
-          </tr>
-          <tr>
-            <th>ジャンル</th>
-            <td><%= f.select :genre, Article.genres.keys.to_a, {} %></td>
-          </tr>
-        </table>
-        <div class="panel panel-info">
+      <div class="modal-header">
+        <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">詳細情報</h3>
+            <% if @article.id.blank? %>
+            <h3 class="panel-title">新規登録</h3>
+            <% else %>
+            <h3 class="panel-title">~修正画面~ 投稿ID：<%=@article.id %> / 投稿者名：<%=@article.user_info.name %></h3>
+            <% end %>
           </div>
           <div class="panel-body">
-            <div class="form-group">
-              <label for="name" class="col-xs-12 control-label">お店の住所</label>
-              <div class="form-group">
-                <%= f.text_field :address,id:"address",class:"articleDetail-imput" %>
+            <% if @article.errors.any? %>
+              <div class="alert alert-dismissible alert-danger errorMsg　errorMsg_possiton" style="">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h2 style="display:inline">入力内容にエラーがあります。</h2>
+                <p>以下の<%= @article.errors.count %>個のエラーを修正してください。</p>
+                <ul>
+                  <% @article.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
               </div>
-              <label for="name" class="col-xs-12 control-label">お店の電話番号</label>
-              <div class="form-group">
-                <%= f.text_field :tell,id:"tell",class:"articleDetail-imput" %>
+            <% end %>
+            <%# 複数登録し、スライド式にしたい！%>
+            <div class="articleDetail-picture col-xs-12">
+              <div class="preview"></div>
+              <% unless @article.picture.blank? %>
+                <div class="img">
+                  <div class="thumbnail" id="thumbnail">
+                    <%=  set_picture(@article.picture,"imageSize_detailArticle","PostPicture") %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="articleDetail-picture_button">
+                <%= f.label :picture, class: "btn btn-primary " do%>
+                  <i class="glyphicon glyphicon-camera" aria-hidden="true">
+                    <span>写真を選ぶ</span>
+                  <%= f.file_field :picture,style: "display:none;" %>
+                  <%= f.hidden_field :picture_cache %>
+                </i>
+                <% end %>
               </div>
-              <label for="name" class="col-xs-12 control-label">営業時間</label>
-              <div class="form-group">
-                <input type="text" class="form-control" id="inputWarning" placeholder="未実装 準備中" disabled="">
+            </div>
+            <table class="table table-striped table-hover articleDetail-dataTable">
+              <tr>
+                <th>お店の名前</th>
+                <td><%= f.text_field :name,id:"name",class:"articleDetail-imput" %></td>
+              </tr>
+              <tr>
+                <th>お店の場所</th>
+                <td><%= f.text_field :station,id:"station",class:"articleDetail-imput" %></td>
+              </tr>
+              <tr>
+                <th>コメント</th>
+                <td><%= f.text_area :art_comment, autofocus: true,id:"art_comment",class:"articleDetail-imput articleDetail-imput_textArea" %></td>
+              </tr>
+              <tr>
+                <th>ジャンル</th>
+                <td><%= f.select :genre, Article.genres.keys.to_a, {} %></td>
+              </tr>
+            </table>
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">詳細情報</h3>
               </div>
-              <label for="name" class="col-xs-12 control-label">駐車場</label>
-              <div class="form-group">
-                <%= f.select :parking, Article.parkings.keys.to_a, {} %>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="name" class="col-xs-12 control-label">お店の住所</label>
+                  <div class="form-group">
+                    <%= f.text_field :address,id:"address",class:"articleDetail-imput" %>
+                  </div>
+                  <label for="name" class="col-xs-12 control-label">お店の電話番号</label>
+                  <div class="form-group">
+                    <%= f.text_field :tell,id:"tell",class:"articleDetail-imput" %>
+                  </div>
+                  <label for="name" class="col-xs-12 control-label">営業時間</label>
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="inputWarning" placeholder="未実装 準備中" disabled="">
+                  </div>
+                  <label for="name" class="col-xs-12 control-label">駐車場</label>
+                  <div class="form-group">
+                    <%= f.select :parking, Article.parkings.keys.to_a, {} %>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-        <%= f.submit "更新する",class:"btn btn-primary"%>
+        <%#エラーで遷移後にウインドウを閉じれないため、Backにする。要検討 %>
+        <%= link_to '閉じる',:back ,class:"btn btn-default"%>
+        <%= f.submit "登録する",class:"btn btn-primary"%>
       </div>
     <% end %>
   </div>
