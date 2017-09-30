@@ -8,17 +8,16 @@
         </div>
         <div class="panel-body">
           <% if @evaluate.errors.any? %>
-            <section>
-              <div class="message message_error">
-                <h2>入力内容にエラーがあります。</h2>
-                以下の<%= @evaluate.errors.count %>個のエラーを修正してください。
-                <ul>
-                  <% @evaluate.errors.full_messages.each do |message| %>
+            <div class="alert alert-dismissible alert-danger errorMsg　errorMsg_possiton" style="">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <h2 style="display:inline">入力内容にエラーがあります。</h2>
+              <p>以下の<%= @evaluate.errors.count %>個のエラーを修正してください。</p>
+              <ul>
+                <% @evaluate.errors.full_messages.each do |message| %>
                   <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-            </section>
+                <% end %>
+              </ul>
+            </div>
           <% end %>
           <table class="table table-striped table-hover evaluate-table">
             <tr>
@@ -48,8 +47,6 @@
   </div>
   <%end%>
 </div>
-
-
 
 <script>
 $(function() {

@@ -32,12 +32,10 @@
               <%= render partial: '/likes/like', locals: {article: @article, like: @like} %>
             </div>
           <% end %>
-          <% if true %>
+            <% unless @evaluate.blank? %>
             <div class="articleDetail-buttons_someoneEvaluate">
               <%= link_to article_evaluates_path(article_id:@article.id),remote:true  do %>他の人の評価<% end %>
             </div>
-          <% end %>
-            <% unless @evaluate.blank? %>
             <div class="panel panel-danger articleDetail-evaluate">
               <div class="panel-heading">
                 <h3 class="panel-title"><%= your_name?(@evaluate.user_info)%>の評価</h3>
