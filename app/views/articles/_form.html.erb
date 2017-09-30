@@ -31,7 +31,7 @@
             <% unless @article.picture.blank? %>
               <div class="img">
                 <div class="thumbnail" id="thumbnail">
-                  <%=  set_picture(@article.picture,"imageSize_detailArticle","PostPicture") %>
+                  <%= set_picture(@article.picture,"imageSize_detailArticle","PostPicture") %>
                 </div>
               </div>
             <% end %>
