@@ -51,7 +51,6 @@ class ArticlesController < ApplicationController
         #format.json { render :show, status: :created, location: @article }
         #format.js { @status = "success"}
       else
-        binding.pry
         format.html { render :new }
         format.json { render json: @article.errors, status: :unprocessable_entity }
         ##format.js { @status = "fail" }
