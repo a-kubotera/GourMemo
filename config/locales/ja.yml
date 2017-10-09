@@ -1,4 +1,12 @@
 ja:
+#以下、必要に応じて追記。Helperで呼び出す。
+  dictionary:
+    messages:
+      hello_user: 'ようこそ %{user_name} さん'
+    words:
+
+
+
   activerecord:
     errors:
       messages:
@@ -20,7 +28,7 @@ ja:
       evaluates:
         name: 日時
         evaluate: 評価ポイント
-        eva_comment: コメント                    
+        eva_comment: コメント
 
   date:
     abbr_day_names:

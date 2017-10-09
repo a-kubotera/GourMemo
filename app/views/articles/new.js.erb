@@ -1,5 +1,6 @@
-$("#user-modal").html("<%= escape_javascript(render 'form') %>")
+$("#user-modal").html("<%= escape_javascript(render 'new') %>")
 $("#user-modal").modal("show")
+
 $('form').on('change', 'input[type="file"]', function(e) {
   $('#thumbnail').remove();
   var file = e.target.files[0],

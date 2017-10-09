@@ -15,6 +15,7 @@
 //= require bootstrap-sprockets
 // [TOPIC] jquery_ujsはRemote:trueのときにauthenticity_tokenを送るために必須
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require turbolinks
 //= require data-confirm-modal
 //= require_tree .
