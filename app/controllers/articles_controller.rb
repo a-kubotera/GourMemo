@@ -100,7 +100,7 @@ class ArticlesController < ApplicationController
     end
 
     def article_params
-        # params.require(:picture).permit(:date)
-        params.require(:article).permit(:name,:address,:tell,:art_comment,:source,:genre,:parking,:station,:picture,:image_cache, :remove_image)
+      # params.require(:picture).permit(:date)
+      params.require(:article).permit(:name,:address,:tell,:art_comment,:source,:genre,:parking,:station,:picture,:image_cache, :remove_image)
     end
 end
