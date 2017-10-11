@@ -71,14 +71,16 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_user_registration_path do %>
+                  <%= link_to new_user_registration_path , modal: true do %>
                   <i class="fa fa-user-plus" aria-hidden="true"></i>
                     <span class="">新規登録</span>
                   <% end %>
                 </li>
               </ul>
             <% end %>
-            <p class="navbar-text navbar-right" style="margin-right:50px;">ようこそ <%= signed_in?? current_user.name : 'ゲスト' %> さん</p>
+            <p class="navbar-text navbar-right" style="margin-right:50px;">
+              <%= t 'dictionary.messages.hello_user', user_name: signed_in?? current_user.name : 'ゲスト' %>
+            </p>
           </div>
         </div>
       </nav>

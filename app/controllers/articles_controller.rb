@@ -42,19 +42,22 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    #binding.pry
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-
+    # binding.pry
     respond_to do |format|
       if @article.save
         format.html { redirect_to top_path, notice: '投稿しました！' }
-        #format.json { render :show, status: :created, location: @article }
-        #format.js { @status = "success"}
+        format.json { render json: @article}
       else
         format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-        ##format.js { @status = "fail" }
-        ##binding.pry
+        @article.errors.each do |name, msg|
+          tName = t "activerecord.attributes.evaluate.#{name}"
+          @article.errors.messages[name] =  tName + msg
+        end
+        @article.errors.messages[:target] = "article"
+        format.js   { render json: @article.errors }
       end
     end
   end
@@ -68,8 +71,18 @@ class ArticlesController < ApplicationController
         format.html { redirect_to top_path, notice: '修正完了しました！' }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        @article.errors.each do |name, msg|
+          tName = t "activerecord.attributes.article.#{name}"
+          flash.now[name] = tName + msg
+        end
+        @article.errors.messages.each {
+           |key, value|
+           @article.errors.messages[key] = flash.now[key]
+         }
+        @article.errors.messages[:target] = "article"
+        format.json { render json: @article.errors }
+        format.js   { render json: @article.errors }
       end
     end
   end

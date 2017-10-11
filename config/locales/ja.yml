@@ -1,4 +1,13 @@
 ja:
+#以下、必要に応じて追記。Helperで呼び出す。
+  dictionary:
+    messages:
+      hello_user: 'ようこそ %{user_name} さん'
+
+    words:
+      aaa: "テスト"
+      bbb: "テスト"
+
   activerecord:
     errors:
       messages:
@@ -8,6 +17,13 @@ ja:
           has_many: "%{record}が存在しているので削除できません"
     attributes:
       article:
+        index:
+          title: 'ユーザ一覧'
+        show:
+          title: '%{user_name}さんのユーザ情報'
+        edit:
+          title: '%{user_name}さんのユーザ情報を編集'
+
         name: 名前
         address: 住所
         tell: 電話番号
@@ -17,10 +33,10 @@ ja:
         station: 最寄り駅
         art_comment: コメント
         source: 情報元
-      evaluates:
-        name: 日時
+      evaluate:
+        date: 日時
         evaluate: 評価ポイント
-        eva_comment: コメント                    
+        eva_comment: 評価コメント
 
   date:
     abbr_day_names:

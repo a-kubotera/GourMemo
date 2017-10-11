@@ -141,3 +141,6 @@ gem 'rails_12factor', group: :production
 gem 'bullet', :group => :development
 #モーダルダイアログをいい感じに
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
+#お試し
+gem 'remotipart'

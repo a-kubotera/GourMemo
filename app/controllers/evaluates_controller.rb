@@ -26,8 +26,12 @@ class EvaluatesController < ApplicationController
         format.html { redirect_to top_path, notice: '評価しました！' }
       else
         format.html { render :new }
-        format.json { render json: @evaluate.errors, status: :unprocessable_entity }
-        #binding.pry
+        @evaluate.errors.each do |name, msg|
+          tName = t "activerecord.attributes.evaluate.#{name}"
+          @evaluate.errors.messages[name] =  tName + msg
+        end
+        @evaluate.errors.messages[:target] = "evaluate"
+        format.js   { render json: @evaluate.errors }
       end
     end
   end
@@ -43,9 +47,13 @@ class EvaluatesController < ApplicationController
         format.html { redirect_to top_path, notice: '評価を修正しました！' }
         format.json { render :show, status: :ok, location: @evaluate }
       else
-
         format.html { render :new }
-        format.json { render json: @evaluate.errors, status: :unprocessable_entity }
+        @evaluate.errors.each do |name, msg|
+          tName = t "activerecord.attributes.evaluate.#{name}"
+          @evaluate.errors.messages[name] =  tName + msg
+        end
+        @evaluate.errors.messages[:target] = "evaluate"
+        format.js   { render json: @evaluate.errors }
       end
     end
   end
