@@ -3,6 +3,13 @@ $(document).on('turbolinks:load', function () {
   $(document).bind('ajaxError', 'form#user_modal', function(event, jqxhr, settings, exception){
 
     // note: jqxhr.responseJSON undefined, parsing responseText instead
+    if (jqxhr.responseText === undefined) {
+      jqxhr.responseText = {"name":"名前を入力してください"}
+      let a = jqxhr.responseText
+      jqxhr.responseText = JSON.stringify(a)
+
+    }
+    // debugger
     $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
 
   });

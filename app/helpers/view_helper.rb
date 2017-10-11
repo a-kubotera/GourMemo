@@ -1,4 +1,6 @@
 module ViewHelper
+
+  #作成中
   def globalResources(key,source,*others)
     case source
       when 'article' then
@@ -11,4 +13,6 @@ module ViewHelper
         どの値にも一致しない場合に行う処理
     end
   end
+
+
 end

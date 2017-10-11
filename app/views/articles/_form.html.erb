@@ -1,7 +1,6 @@
 <% modal ||= false %>
 <% remote = modal ? true : false %>
-<%= form_for(@article,format: 'json', remote: true, authenticity_token: true,  html: {role: :form, 'data-model' => 'article'}) do |f| %>
-
+<%= form_for(@article, remote: true, authenticity_token: true) do |f| %>
   <%# 複数登録し、スライド式にしたい！%>
   <div class="articleDetail-picture col-xs-12">
     <div class="preview"></div>
@@ -85,5 +84,4 @@
     </div>
   </div>
   <%= f.submit "登録する",class:"btn btn-primary"%>
-
 <% end %>

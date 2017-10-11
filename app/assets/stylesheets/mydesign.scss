@@ -316,7 +316,6 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
 }
 
 .evaluate{
-  &-field{display: none!important;}
   &-table{
   }
   &-tableTitle{width:120px;}
@@ -344,6 +343,9 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   font-family: "Ionicons";
   font-size: 20px;
   color: #aaa;
+}
+.range-group [type="range"] {
+  display: none!important;
 }
 .range-group > a.on:before {
   content: "★";

@@ -4,8 +4,11 @@ class Evaluate < ActiveRecord::Base
   belongs_to :article
 
   #エラーチェック
-  validates :user_id, presence: true
-  validates :article_id, presence: true
+  #validates :user_id, presence: true
+  #validates :article_id, presence: true
   validates :date, presence: true
+  validates :evaluate, presence: true
+  validates :eva_comment, presence: true
+
 
 end

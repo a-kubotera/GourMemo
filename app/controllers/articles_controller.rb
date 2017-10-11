@@ -2,7 +2,6 @@ class ArticlesController < ApplicationController
   #index以外はログインしないとダメ
   before_action :authenticate_user!, except: [:index]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-
   # articles#indexは以下の2通り
   # articles_index GET    /articles/index(.:format)  ▶　全記事一覧
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
@@ -43,27 +42,22 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    # binding.pry
+    #binding.pry
     @article = Article.new(article_params)
     @article.user_id = current_user.id
+    # binding.pry
     respond_to do |format|
       if @article.save
         format.html { redirect_to top_path, notice: '投稿しました！' }
-        format.json { render :show, status: :created, location: @article }
-        #format.js { @status = "success"}
+        format.json { render json: @article}
       else
         format.html { render :new }
         @article.errors.each do |name, msg|
-          tName = t "activerecord.attributes.article.#{name}"
-          flash.now[name] = tName + msg
+          tName = t "activerecord.attributes.evaluate.#{name}"
+          @article.errors.messages[name] =  tName + msg
         end
-        @article.errors.messages.each {
-           |key, value|
-           @article.errors.messages[key] = flash.now[key]
-         }
         @article.errors.messages[:target] = "article"
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-        format.js   { render json: @article.errors,status: :unprocessable_entity }
+        format.js   { render json: @article.errors }
       end
     end
   end
@@ -77,8 +71,18 @@ class ArticlesController < ApplicationController
         format.html { redirect_to top_path, notice: '修正完了しました！' }
         format.json { render :show, status: :ok, location: @article }
       else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        @article.errors.each do |name, msg|
+          tName = t "activerecord.attributes.article.#{name}"
+          flash.now[name] = tName + msg
+        end
+        @article.errors.messages.each {
+           |key, value|
+           @article.errors.messages[key] = flash.now[key]
+         }
+        @article.errors.messages[:target] = "article"
+        format.json { render json: @article.errors }
+        format.js   { render json: @article.errors }
       end
     end
   end
