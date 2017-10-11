@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
       else
         format.html { render :new }
         @article.errors.each do |name, msg|
-          tName = t "activerecord.attributes.evaluate.#{name}"
+          tName = t "activerecord.attributes.article.#{name}"
           @article.errors.messages[name] =  tName + msg
         end
         @article.errors.messages[:target] = "article"
