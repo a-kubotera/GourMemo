@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 gem 'turbolinks'     #Railsのページ遷移高速化のためのgem
 gem 'sdoc', group: :doc # Rubyのソースを読み取り、ブラウザで閲覧しやすいドキュメントを生成してくれる
-#gem 'haml-rails' #hamlが使えるように
+gem 'haml-rails' #hamlが使えるように
 
 # UI/UX
 gem 'jquery-rails'

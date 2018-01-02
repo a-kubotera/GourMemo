@@ -258,7 +258,7 @@ ja:
       short: "%y/%m/%d %H:%M"
     pm: 午後
   top:
-    index2:
+    index:
       title: マイページ
 
   user:

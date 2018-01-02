@@ -41,10 +41,7 @@
   .panel-body
     #myTabContent.tab-content
       #news.tab-pane.fade.active.in.col-xs-12
-        - flash.each do |key, value|
-          - key = "success" if key == "notice"
-          - key = "danger"  if key == "alert"
-          = content_tag :div, value, class: "alert alert-#{key}"
+        = render partial: 'shared/flash'
         %h4
           = t('messages.topix',:user_name => your_name?(@user))
         %table.table.table-striped.table-hover.topTable
@@ -65,7 +62,7 @@
                 %td.plase
                   = f.station
                 %td.point
-                  - unless f.evaluates.where(user_id:f.user_info.id).blank?
+                  -# unless f.evaluates.where(user_id:f.user_info.id).blank?
                     ポイントを表示
                 %td.date
                   = f.created_at.strftime("%y/%m/%d")

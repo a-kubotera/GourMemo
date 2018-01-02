@@ -1,11 +1,6 @@
 .container.landingPage
   = image_tag 'bg.jpg',class:"topPage-img"
   .row
-    - flash.each do |key, value|
-      .col-xs-12{:style => "padding-top:20px;padding-bottom:20px;"}
-        - key = "success" if key == "notice"
-        - key = "danger"  if key == "alert"
-        = content_tag :div, value, class: "alert alert-#{key}"
     .topPage-siteTitle.col-xs-12
       %h1= t('common.sitetitle')
       = simple_format(t('common.sitecomment'),:class => "lead")
