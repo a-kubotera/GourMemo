@@ -13,6 +13,4 @@ module ViewHelper
         どの値にも一致しない場合に行う処理
     end
   end
-
-
 end

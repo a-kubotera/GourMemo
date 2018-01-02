@@ -1,0 +1,75 @@
+.panel.panel-default.devise-bs
+  .panel-heading
+    .bs-component
+      %ul.nav.nav-tabs
+        %li
+          %p.userForm-pageTitle
+            = t('.title')
+        %li.news.active
+          %a{"data-toggle" => "tab", :href => "#News"} 
+            = t('common.whatsnew')
+        %li.profile
+          = link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do
+            = t('common.profile')
+        %li.article
+          = link_to articles_path(user_id: @user.id),{remote:true,method: :get },{'data-toggle':'tab'} do
+            = t('common.articles')
+        %li.evaluate
+          = link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do
+            = t('common.evaluates')
+        - login_user?(@user.id) do
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              = t('common.account')
+              %span.caret
+            %ul.dropdown-menu
+              %li
+                = link_to edit_user_registration_path,method: :get do
+                  %i.fa.fa-pencil.fa-fw
+                  = t('common.edit')
+              %li.divider
+              %li
+                = link_to registration_path(resource_name), method: :delete,
+                    data: {title: t('common.delete_account'),
+                    confirm:t('modal_confrim.user_delete.message',:email => current_user.email,name:current_user.name.present?? t('common.unregistered') : current_user.name,cnt:current_user.articles.count),
+                    'commit' => t('common.delete'),
+                    'cancel' => t('common.cancel'),
+                    'verify' => current_user.email,
+                    'verify-text' => t('modal_confrim.user_delete.verify')} do
+                  %i.fa.fa-trash-o.fa-fw
+                  = t('common.delete')
+  .panel-body
+    #myTabContent.tab-content
+      #news.tab-pane.fade.active.in.col-xs-12
+        - flash.each do |key, value|
+          - key = "success" if key == "notice"
+          - key = "danger"  if key == "alert"
+          = content_tag :div, value, class: "alert alert-#{key}"
+        %h4
+          = t('messages.topix',:user_name => your_name?(@user))
+        %table.table.table-striped.table-hover.topTable
+          %thead
+            %tr
+              %th= t('common.table.update')
+              %th= t('common.table.name')
+              %th= t('common.table.place')
+              %th= t('common.table.evaluate')
+              %th= t('common.table.postdate')
+          %tbody
+            - @articles.each do |f|
+              %tr
+                %td.dateTime
+                  = f.updated_at.strftime("%y/%m/%d %H:%M:%S")
+                %td.name
+                  = f.name
+                %td.plase
+                  = f.station
+                %td.point
+                  - unless f.evaluates.where(user_id:f.user_info.id).blank?
+                    ポイントを表示
+                %td.date
+                  = f.created_at.strftime("%y/%m/%d")
+      #profile.tab-pane.fade.col-xs-12
+      #article.tab-pane.fade.col-xs-12
+      #evaluate.tab-pane.fade.col-xs-12
+#user-modal.modal.fade{"aria-hidden" => "true", :role => "dialog", :tabindex => "-1"}

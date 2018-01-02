@@ -1,13 +1,38 @@
 ja:
-#以下、必要に応じて追記。Helperで呼び出す。
-  dictionary:
-    messages:
-      hello_user: 'ようこそ %{user_name} さん'
-
-    words:
-      aaa: "テスト"
-      bbb: "テスト"
-
+  messages:
+    hello_user: ようこそ %{user_name} さん
+    topix: '%{user_name}の評価'
+  common:
+    sitetitle: ~ GourMemo ~
+    sitecomment: |
+      「いつかその時」のために、
+      　　　　　　気になったお店を登録しておこう！
+    unregistered: 未登録
+    delete: 削除する
+    cancel: やめる
+    mypage: マイページ
+    account: アカウント
+    delete_account: アカウントの削除
+    edit: 修正する
+    whatsnew: What's New
+    profile: プロフィール
+    articles: 投稿記事一覧
+    evaluates: 評価記事一覧
+    table:
+      update: 更新日
+      name: タイトル
+      place: 場所
+      evaluate: 評価
+      postdate: 投稿日
+  modal_confrim:
+    user_delete: 
+      message: |
+        以下のアカウントを削除しますか？<br>
+          <p class='text-danger'>アカウントを削除すると投稿したすべての記事も削除されます。</p>
+        E-mail：<strong>%{email}</strong><br>
+        お名前：<strong>%{name}</strong><br>
+        投稿記事数：<strong>%{cnt} 件</strong><br>
+      verify: 確認のため、登録アドレスを入力してください。
   activerecord:
     errors:
       messages:
@@ -23,7 +48,6 @@ ja:
           title: '%{user_name}さんのユーザ情報'
         edit:
           title: '%{user_name}さんのユーザ情報を編集'
-
         name: 名前
         address: 住所
         tell: 電話番号
@@ -37,7 +61,6 @@ ja:
         date: 日時
         evaluate: 評価ポイント
         eva_comment: 評価コメント
-
   date:
     abbr_day_names:
     - 日
@@ -234,3 +257,10 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       short: "%y/%m/%d %H:%M"
     pm: 午後
+  top:
+    index2:
+      title: マイページ
+
+  user:
+    show:
+      title: ユーザー情報
