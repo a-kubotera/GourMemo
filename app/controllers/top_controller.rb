@@ -3,9 +3,8 @@ class TopController < ApplicationController
     @users = User.all
   end
 
-  def index2
+  def index
     @user = current_user
-    @page_title ='マイページ'
     #もう少し良い方法があれば変えてみること！
     @followUserArticle = @user.followed_users.map{|user| {user_article: {name: user.name, artcles: user.articles}}}
 
