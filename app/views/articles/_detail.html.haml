@@ -1,0 +1,88 @@
+.articleDetail-picture.col-xs-12
+  = set_picture(@article.picture,"imageSize_detailArticle","test")
+%table.table.table-striped.table-hover.articleDetail-dataTable
+  %tr
+    %th=t('.name')
+    %td= @article.name
+  %tr
+    %th=t('.station')
+    %td= @article.station
+  %tr
+    %th=t('.art_comment')
+    %td.articleDetail-comment
+      = @article.art_comment
+  %tr
+    %th=t('.genre')
+    %td= @article.genre
+  %tr
+    %th.articleDetail-dataTable_divider{:colspan => "2"}
+- not_login_user?(@article.user_info.id) do
+  .articleDetail-likes{:style => "display:"}
+    = render partial: '/likes/like', locals: {article: @article, like: @like}
+
+- unless @evaluate.blank?
+  .articleDetail-buttons_someoneEvaluate
+    = link_to article_evaluates_path(article_id:@article.id),remote:true do
+      みんなの評価
+
+  .panel.panel-danger.articleDetail-evaluate
+    .panel-heading
+      %h3.panel-title
+        = your_name?(@evaluate.user_info)
+        の評価
+    .panel-body
+      %table.table.table-striped.table-hover.articleDetail-dataTable
+        %tr
+          %th 
+            評価日
+          %td.articleDetail-evaDate
+            = @evaluate.date.strftime("%Y年 %m月%d日")
+        %tr
+          %th 
+            評価
+          %td.articleDetail-evaPoint
+        %tr
+          %th.articleDetail-dataTable_divider{:colspan => "2"}
+      %label.control-label コメント
+      .panel.panel-default
+        .panel-body.articleDetail-comment
+          = @evaluate.eva_comment
+      .articleDetail-buttons
+        - if @evaluate.present? && @article.user_info.id == current_user.id
+          = link_to edit_article_evaluate_path(article_id:@article.id,id:@evaluate.id),remote:true ,class:"btn btn-primary" do
+            評価を更新する
+
+.articleDetail-buttons
+  - login_user?(@article.user_info.id) do
+    = link_to edit_article_path(@article.id),remote:true ,class:"btn btn-warning" do
+      内容を修正する
+  - if your_article? || are_you_like?
+    - unless already_evaluated_it?
+      = link_to new_article_evaluate_path(article_id:@article.id),remote:true,class:"btn btn-primary" do 
+        お店を評価する
+.panel.panel-info
+  .panel-heading
+    %h3.panel-title 
+      詳細情報
+  .panel-body
+    .form-group
+      %label.control-label 
+        お店の住所
+      .panel.panel-default
+        .panel-body
+          = @article.address
+      %label.control-label 
+        お店の電話番号
+      .panel.panel-default
+        .panel-body
+          = @article.tell
+      %label.control-label 
+        営業時間
+      .panel.panel-default
+        .panel-body
+          準備中
+      %label.control-label 
+        駐車場
+      .panel.panel-default
+        .panel-body
+          = @article.parking

@@ -1,0 +1,15 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      .panel.panel-primary
+        .panel-heading
+          %h3.panel-title
+            - @title = '.' + action_name + 'title'
+            = t(@title,:No => @article.id, :Name => @article.user_info.name)
+        .panel-body
+          - if action_name =='show'
+            = render 'detail', modal: true
+          - else
+            = render 'form', modal: true
+    .modal-footer
+      = link_to t('common.close'),:back ,class:"btn btn-default"

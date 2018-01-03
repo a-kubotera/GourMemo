@@ -2,6 +2,17 @@ ja:
   messages:
     hello_user: ようこそ %{user_name} さん
     topix: '%{user_name}の評価'
+    post: '%{date} 投稿'
+    nothing_articles:
+      article: '%{user_name}の登録したお店は%{status}'
+      non: ありません
+      done: すべて評価済みです
+      art_thanks: |
+        行ってみたいお店や、テレビや雑誌で見て気になるお店はありませんか？
+        新しいお店を見つけたらまずは登録してみましょう!
+      evaluate: '%{user_name}が評価した記事がありません。'
+      eva_thanks: |
+        自分で登録したお店や、いいね！したお店に実際に行ってみて、評価しよう！
   common:
     sitetitle: ~ GourMemo ~
     sitecomment: |
@@ -10,6 +21,7 @@ ja:
     unregistered: 未登録
     delete: 削除する
     cancel: やめる
+    close: 閉じる
     mypage: マイページ
     account: アカウント
     delete_account: アカウントの削除
@@ -18,6 +30,9 @@ ja:
     profile: プロフィール
     articles: 投稿記事一覧
     evaluates: 評価記事一覧
+    shop_info: お店の詳細情報
+    select_picture: 写真を選ぶ
+    like: いいね!
     table:
       update: 更新日
       name: タイトル
@@ -33,6 +48,8 @@ ja:
         お名前：<strong>%{name}</strong><br>
         投稿記事数：<strong>%{cnt} 件</strong><br>
       verify: 確認のため、登録アドレスを入力してください。
+    article_delete:
+      title: 記事の削除
   activerecord:
     errors:
       messages:
@@ -41,21 +58,15 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     attributes:
-      article:
-        index:
-          title: 'ユーザ一覧'
-        show:
-          title: '%{user_name}さんのユーザ情報'
-        edit:
-          title: '%{user_name}さんのユーザ情報を編集'
-        name: 名前
-        address: 住所
+      article: &article
+        name: お店の名前
+        address: お店の住所
         tell: 電話番号
         picture: 写真
         genre: ジャンル
         parking: 駐車場
         station: 最寄り駅
-        art_comment: コメント
+        art_comment: 詳細
         source: 情報元
       evaluate:
         date: 日時
@@ -260,7 +271,16 @@ ja:
   top:
     index:
       title: マイページ
-
   user:
     show:
       title: ユーザー情報
+  articles:
+    modal:
+      newtitle: '~新規登録~'
+      showtitle: '~詳細表示~ 投稿No：%{No} 投稿者:%{Name}'
+      edittitle: '~修正画面~ 投稿No：%{No} 投稿者:%{Name}'
+    form: 
+      <<: *article
+    detail:
+      <<: *article
+      
