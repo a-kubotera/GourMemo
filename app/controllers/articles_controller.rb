@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
+   
     a =[]
     if params[:user_id]
       @user = User.find(params[:user_id])
@@ -38,13 +39,14 @@ class ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @article.user_id = current_user.id
   end
 
   def create
     #binding.pry
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    # binding.pry
+    binding.pry
     respond_to do |format|
       if @article.save
         format.html { redirect_to top_path, notice: '投稿しました！' }

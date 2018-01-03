@@ -1,0 +1,66 @@
+- modal ||= false
+-remote = modal ? true : false
+= form_for(@article, remote: true, authenticity_token: true) do |f|
+  -# 複数登録し、スライド式にしたい！
+  .articleDetail-picture.col-xs-12
+    .preview
+    - unless @article.picture.blank?
+      .img
+        #thumbnail.thumbnail
+          = set_picture(@article.picture,"imageSize_detailArticle","PostPicture")
+    .articleDetail-picture_button
+      = f.label :picture, class: "btn btn-primary" do
+        %i.glyphicon.glyphicon-camera{"aria-hidden" => "true"}
+          %span=t('common.select_picture')
+        = f.file_field :picture,style: "display:none;"
+        = f.hidden_field :picture_cache
+  %table.table.table-striped.table-hover.articleDetail-dataTable
+    %tr
+      %th=t('.name')
+      %td.form-group
+        = f.text_field :name,id:"name", class: 'form-control'
+        %span.help-block
+    %tr
+      %th=t('.station')
+      %td.form-group
+        = f.text_field :station,id:"station", class: 'form-control'
+        %span.help-block
+    %tr
+      %th=t('.art_comment')
+      %td.form-group
+        = f.text_area :art_comment, autofocus: true,id:"art_comment", class: 'form-control articleDetail-imput_textArea'
+        %span.help-block
+    %tr
+      %th=t('.genre')
+      %td.form-group
+        = f.select :genre, Article.genres.keys.to_a, {} ,class: 'form-control'
+        %span.help-block
+  .panel.panel-info
+    .panel-heading
+      %h3.panel-title=t('common.shop_info')
+    .panel-body
+      .form-group
+        = f.label :address, class: 'control-label'
+        %br
+        = f.text_field :address, class: 'form-control'
+        %span.help-block
+      .form-group
+        = f.label :tell, class: 'control-label'
+        %br
+        = f.text_field :tell, class: 'form-control'
+        %span.help-block
+      .form-group
+        %label.col-xs-12.control-label{:for => "name"} 営業時間
+        %input#inputWarning.form-control{:disabled => "disabled", :placeholder => "未実装 準備中", :type => "text"}/
+        %span.help-block
+      .form-group
+        = f.label :parking, class: 'control-label'
+        %br
+        = f.select :parking, Article.parkings.keys.to_a, {}
+        %span.help-block
+      .form-group
+        = f.label :source, class: 'control-label'
+        %br
+        = f.text_field :source, class: 'form-control'
+        %span.help-block
+  = f.submit class:"btn btn-primary"
