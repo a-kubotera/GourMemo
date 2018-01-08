@@ -144,3 +144,5 @@ gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 
 #お試し
 gem 'remotipart'
+#haml変換
+gem 'erb2haml'
