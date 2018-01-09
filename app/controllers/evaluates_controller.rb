@@ -23,7 +23,7 @@ class EvaluatesController < ApplicationController
 
     respond_to do |format|
       if @evaluate.save
-        format.html { redirect_to top_path, notice: '評価しました！' }
+        format.html { redirect_to root_path, notice: '評価しました！' }
       else
         format.html { render :new }
         @evaluate.errors.each do |name, msg|
@@ -44,7 +44,7 @@ class EvaluatesController < ApplicationController
         @article = Article.find(params[:article_id])
     respond_to do |format|
       if @evaluate.update(evaluate_params)
-        format.html { redirect_to top_path, notice: '評価を修正しました！' }
+        format.html { redirect_to root_path, notice: '評価を修正しました！' }
         format.json { render :show, status: :ok, location: @evaluate }
       else
         format.html { render :new }
