@@ -87,7 +87,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to top_url, notice: '削除が完了しました！' }
+      format.html { redirect_to root_path, notice: '削除が完了しました！' }
     end
   end
 
