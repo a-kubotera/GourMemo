@@ -2,7 +2,6 @@ $("#user-modal").html("<%= escape_javascript(render 'modal') %>")
 $("#user-modal").modal("show")
 
 $('form').on('change', 'input[type="file"]', function(e) {
-  
   $('#thumbnail').remove();
   var file = e.target.files[0],
       reader = new FileReader(),
@@ -13,17 +12,14 @@ $('form').on('change', 'input[type="file"]', function(e) {
   }
   reader.onload = (function(file) {
     return function(e) {
-
       $preview.empty();
-
       $preview.append($('<img>').attr({
                 src: e.target.result,
                 class: "imageSize_detailArticle",
                 title: file.name,
                 id:"preview"
-            }));
+      }));
     };
-
   })(file);
   reader.readAsDataURL(file);
 });

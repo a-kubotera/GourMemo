@@ -1,0 +1,32 @@
+.col-xs-10.col-xs-offset-1{:style => "min-width:800px;"}
+  %form.form-horizontal.articleList-search
+    %fieldset
+      %legend{:style => "margin:0px;"} ユーザー検索
+      = search_form_for @q,class:"articleList-searchForm" do |f|
+        .col-xs-6
+          %label.control-label{:for => ""} 名前で検索
+          %div
+            = f.text_field :name_eq,class:"form-control",placeholder:"名前"
+        .col-xs-6
+          %label.control-label{:for => ""} メールで検索
+          %div
+            = f.text_field :email_eq,class:"form-control",placeholder:"メールアドレス"
+        .col-xs-6
+          %label.control-label{:for => ""} 住所で検索
+          %div
+            = f.text_field :address_eq,class:"form-control",placeholder:"住所"
+        .col-xs-6.articleList-serchButton
+          %button.btn.btn-default{:type => "submit"}
+            %i.fa.fa-search{"aria-hidden" => "true"}
+            検索
+          %input.btn.btn-default{:type => "reset", :value => "リセット"}/
+    %div
+    - @users.each do |user|
+      .col-md-2.col-sm-3.col-xs-4.showUser.showUser-index
+        .showUser_avatar
+          = link_to user do
+            = profile_img(user,"imageSize_userIndex")
+        .showUser_email
+          = user.email
+        .showUser_name
+          = user.name

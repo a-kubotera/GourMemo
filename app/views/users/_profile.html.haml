@@ -1,0 +1,32 @@
+.col-xs-4.userForm.userForm-avater
+  .col-md-12
+    %p#defAvater= profile_img(@user,"imageSize_myPage") if profile_img(@user)
+  - not_login_user?(@user.id) do
+    .col-xs-12.userForm-follow
+      = render partial: 'follow_form', locals: { user: @user } if signed_in?
+.col-xs-8.userForm.userForm-name
+  %p.userForm-icon= material_icon.account_circle.md_18
+  %p.userForm-title お名前
+  .well.well-sm
+    = @user.name
+.col-xs-8.userForm.userForm-address
+  %p.userForm-icon.userForm-icon_fa= fa_icon "address-card"
+  %p.userForm-title 住所
+  .well.well-sm
+    = @user.address
+.col-xs-8.userForm.userForm-age
+  %p.userForm-icon= material_icon.account_circle.md_18
+  %p.userForm-title 年齢
+  .well.well-sm
+    = @user.age
+.col-xs-12.userForm.userForm-profile
+  %p.userForm-icon= material_icon.account_circle.md_18
+  %p.userForm-title プロフィール
+  .well.well-sm.userForm-br= @user.profile
+.col-xs-12.userForm-relation
+  %section.userForm-relation_follow
+    %i.fa.fa-user-o{"aria-hidden" => "true"}
+    = render partial: 'relationships/index', locals: { user: @follow, title:"フォロー"}
+  %section.userForm-relation_follower
+    %i.fa.fa-user{"aria-hidden" => "true"}
+    = render partial: 'relationships/index', locals: { user: @follower, title:"フォロワー"}

@@ -7,7 +7,6 @@ class ArticlesController < ApplicationController
   # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
-   
     a =[]
     if params[:user_id]
       @user = User.find(params[:user_id])
@@ -46,11 +45,10 @@ class ArticlesController < ApplicationController
     #binding.pry
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    binding.pry
     respond_to do |format|
       if @article.save
-        format.html { redirect_to top_path, notice: '投稿しました！' }
-        format.json { render json: @article}
+        format.html { redirect_to root_path, notice: '投稿しました！' }
+        #format.json { render json: @article}
       else
         format.html { render :new }
         @article.errors.each do |name, msg|
@@ -69,8 +67,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to top_path, notice: '修正完了しました！' }
-        format.json { render :show, status: :ok, location: @article }
+        format.html { redirect_to root_path, notice: '修正完了しました！' }
       else
         format.html { render :new }
         @article.errors.each do |name, msg|
