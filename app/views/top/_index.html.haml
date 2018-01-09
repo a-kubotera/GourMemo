@@ -12,7 +12,7 @@
           = link_to user_path(id: @user.id),{remote:true},{'data-toggle':'tab'} do
             = t('common.profile')
         %li.article
-          = link_to articles_path(user_id: @user.id),{remote:true,method: :get },{'data-toggle':'tab'} do
+          = link_to articles_path(user_id: @user.id),{remote:true},{'data-toggle':'tab'} do
             = t('common.articles')
         %li.evaluate
           = link_to articles_path(uid:@user.id),{remote:true,method: :get },{'data-toggle':'tab'} do
