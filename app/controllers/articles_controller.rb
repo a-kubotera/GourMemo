@@ -1,13 +1,10 @@
 class ArticlesController < ApplicationController
-  #index以外はログインしないとダメ
   before_action :authenticate_user!, except: [:index]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  # articles#indexは以下の2通り
-  # articles_index GET    /articles/index(.:format)  ▶　全記事一覧
-  # user_articles GET    /users/:user_id/articles(.:format) ▶　ユーザーの記事一覧
 
   def index
     a =[]
+    
     if params[:user_id]
       @user = User.find(params[:user_id])
       @tagId="article"
@@ -30,7 +27,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @like = Like.new() # 追記
+    @like = Like.new
     @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
     #イイねした人だけが評価できる
     #@likesEvaluate =  @article.likes.where(user_id:current_user.id)
@@ -42,13 +39,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    #binding.pry
     @article = Article.new(article_params)
     @article.user_id = current_user.id
     respond_to do |format|
       if @article.save
         format.html { redirect_to root_path, notice: '投稿しました！' }
-        #format.json { render json: @article}
       else
         format.html { render :new }
         @article.errors.each do |name, msg|
@@ -56,6 +51,7 @@ class ArticlesController < ApplicationController
           @article.errors.messages[name] =  tName + msg
         end
         @article.errors.messages[:target] = "article"
+        #非同期でエラーを表示させる
         format.js   { render json: @article.errors }
       end
     end
@@ -79,7 +75,7 @@ class ArticlesController < ApplicationController
            @article.errors.messages[key] = flash.now[key]
          }
         @article.errors.messages[:target] = "article"
-        format.json { render json: @article.errors }
+        #非同期でエラーを表示させる
         format.js   { render json: @article.errors }
       end
     end
@@ -92,13 +88,11 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
     end
 
     def article_params
-      # params.require(:picture).permit(:date)
       params.require(:article).permit(:name,:address,:tell,:art_comment,:source,:genre,:parking,:station,:picture,:image_cache, :remove_image)
     end
 end

@@ -56,3 +56,5 @@ config/environments/*.local.yml
 
 #追加 アップロードされた画像を無視
 /uploads/
+#haml切り替え用フォルダを無視
+hamlView/
