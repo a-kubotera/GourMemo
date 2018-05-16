@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-#default
+# default
 gem 'rails', '4.2.3'
 gem 'pg'
 gem 'sass-rails'
@@ -11,7 +11,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'sdoc', group: :doc 
 
-#add
+# 追加
 gem 'active_hash'
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
