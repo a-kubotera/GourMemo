@@ -43,7 +43,7 @@
       #news.tab-pane.fade.active.in.col-xs-12
         = render partial: 'shared/flash'
         %h4
-          = t('messages.topix',:user_name => your_name?(@user))
+          = t('messages.topix', user_name: your_name?(@user))
         %table.table.table-striped.table-hover.topTable
           %thead
             %tr

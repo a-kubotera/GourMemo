@@ -1,31 +1,16 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  include ArticleSelect
 
   def index
-    a =[]
-    
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-      @tagId="article"
-      #@userの書いた記事をマップして、@userが評価していない記事を a[]に収納する
-      @user.articles.map{|article| a << article if article.evaluates.where(user_id: article.user_info.id).blank?}
-      @is_ArtCnt = a.length == 0
-      #binding.pry
-    elsif params[:uid]
-      @user = User.find(params[:uid])
-      @tagId="evaluate"
-      #形式を合わせるためにaに収納
-      a = @user.articles_evaluated
-      @is_EvaCnt = a.length == 0
-    else
-      @q        = Article.search(params[:q])
-      @q.sorts = 'id asc'
-      a = @q.result(distinct: true)
-    end
-    @articles = a
+    @user = User.find(params[:user_id].present?? params[:user_id] : params[:uid])
+    @articles = set_articles
+    # paramがuidかuser_idかでタグがarticleかevaluateかを判定
+    @tagId = params[:uid].blank?? "article" : "evaluate"
   end
 
+  
   def show
     @like = Like.new
     @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
@@ -34,13 +19,11 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @article = Article.new
-    @article.user_id = current_user.id
+    @article = current_user.articles.build
   end
 
   def create
-    @article = Article.new(article_params)
-    @article.user_id = current_user.id
+    @article = current_user.articles.build(article_params)
     respond_to do |format|
       if @article.save
         format.html { redirect_to root_path, notice: '投稿しました！' }
@@ -71,10 +54,11 @@ class ArticlesController < ApplicationController
           flash.now[name] = tName + msg
         end
         @article.errors.messages.each {
-           |key, value|
-           @article.errors.messages[key] = flash.now[key]
-         }
+          |key, value|
+          @article.errors.messages[key] = flash.now[key]
+        }
         @article.errors.messages[:target] = "article"
+        binding.pry
         #非同期でエラーを表示させる
         format.js   { render json: @article.errors }
       end

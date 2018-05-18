@@ -1,59 +1,60 @@
-- if @is_ArtCnt || @is_EvaCnt
+- if articles.length == 0
   = render partial: 'shared/nothing_articles'
-- articles.each do |article|
-  .articleList
-    .articleList_header
-    .articleList_body.row
-      .articleList-picture.col-xs-2
-        = set_picture(article.picture,"imageSize_indexArticle","test") 
-      .articleList-dateTime.col-xs-10.text-muted
-        = t('messages.post', :date => article.created_at.strftime("%y/%m/%d %p %l:%M"))
-      .articleList-title.col-xs-10
-        = link_to article_path(id:article.id),remote:true,method: :get do 
-          = article.name
-      .articleList-content.col-xs-10
-        = article.art_comment
-    .articleList_footer.row
-      .col-xs-3
-        .articleList-button.articleList-button_like
-          %ul.nav.nav-pills
-            %li.active
-              - if article.likes.count == 0
-                %a#like_none
-                  %i.fa.fa-thumbs-o-up.fa-fw 
-                  =t('common.like')
-                  %span.badge
-                    0
-                  %i.fa.fa-minus{"aria-hidden" => "true", :style => "font-size:55%;padding-left:2px;"}
-              - else
-                %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-                  %i.fa.fa-thumbs-o-up.fa-fw 
-                  =t('common.like')
-                  %span.badge
-                    = article.likes.count 
-                  %span.caret
-                %ul.dropdown-menu{:role => "menu"}
-                  - article.likes.each do |like|
-                    %li
-                      = link_to user_path(id:like.user.id) do 
-                        = profile_img(like.user,"imageSize_indexAvatar")
-                        = your_name?(like.user)
-                    -# = content_tag(:li, '', :class => 'divider') %>
-      .col-xs-7
-      - if your_article?(article)
-        - @article_delete= article_delete_massage(article)
-        .articleList-button.col-xs-2
-          = link_to article_path(id:article.id), method: :delete,class:"articleList-button_delete btn btn-danger", 
-            title: t('modal_confrim.article_delete.title'),
-            data: {confirm:@article_delete[0],
-            'commit' => t('common.delete'),
-            'cancel' => t('common.cancel'),
-            "verify" => @article_delete[1],} do 
-            = t('common.delete')
-      - else
-        .articleList-contributor.col-xs-2
-          %p.text-muted.articleList_fontMinimum
-            recommended by
-          = link_to user_path(id:article.user_info.id) do
-            = profile_img(article.user_info,"imageSize_indexAvatar")
-            = article.user_info.name
+- else
+  - articles.each do |article|
+    .articleList
+      .articleList_header
+      .articleList_body.row
+        .articleList-picture.col-xs-2
+          = set_picture(article.picture,"imageSize_indexArticle","test") 
+        .articleList-dateTime.col-xs-10.text-muted
+          = t('messages.post', :date => article.created_at.strftime("%y/%m/%d %p %l:%M"))
+        .articleList-title.col-xs-10
+          = link_to article_path(id:article.id),remote:true,method: :get do 
+            = article.name
+        .articleList-content.col-xs-10
+          = article.art_comment
+      .articleList_footer.row
+        .col-xs-3
+          .articleList-button.articleList-button_like
+            %ul.nav.nav-pills
+              %li.active
+                - if article.likes.count == 0
+                  %a#like_none
+                    %i.fa.fa-thumbs-o-up.fa-fw 
+                    =t('common.like')
+                    %span.badge
+                      0
+                    %i.fa.fa-minus{"aria-hidden" => "true", :style => "font-size:55%;padding-left:2px;"}
+                - else
+                  %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                    %i.fa.fa-thumbs-o-up.fa-fw 
+                    =t('common.like')
+                    %span.badge
+                      = article.likes.count 
+                    %span.caret
+                  %ul.dropdown-menu{:role => "menu"}
+                    - article.likes.each do |like|
+                      %li
+                        = link_to user_path(id:like.user.id) do 
+                          = profile_img(like.user,"imageSize_indexAvatar")
+                          = your_name?(like.user)
+                      -# = content_tag(:li, '', :class => 'divider') %>
+        .col-xs-7
+        - if your_article?(article)
+          - @article_delete= article_delete_massage(article)
+          .articleList-button.col-xs-2
+            = link_to article_path(id:article.id), method: :delete,class:"articleList-button_delete btn btn-danger", 
+              title: t('modal_confrim.article_delete.title'),
+              data: {confirm:@article_delete[0],
+              'commit' => t('common.delete'),
+              'cancel' => t('common.cancel'),
+              "verify" => @article_delete[1],} do 
+              = t('common.delete')
+        - else
+          .articleList-contributor.col-xs-2
+            %p.text-muted.articleList_fontMinimum
+              recommended by
+            = link_to user_path(id:article.user_info.id) do
+              = profile_img(article.user_info,"imageSize_indexAvatar")
+              = article.user_info.name
