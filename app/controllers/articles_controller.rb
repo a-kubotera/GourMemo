@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   include ArticleSelect
 
   def index
-    @user = User.find(params[:user_id].present?? params[:user_id] : params[:uid])
+    @user = User&.find(params[:user_id].present?? params[:user_id] : params[:uid])
     @articles = set_articles
     # paramがuidかuser_idかでタグがarticleかevaluateかを判定
     @tagId = params[:uid].blank?? "article" : "evaluate"
