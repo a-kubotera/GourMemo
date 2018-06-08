@@ -1,31 +1,22 @@
 class EvaluatesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_evaluate, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:index, :new, :edit, :create, :update]
+  before_action :set_evaluate, only: [:show, :edit, :update]
 
   def index
-     @article = Article.find(params[:article_id])
-     @evaluates = @article.evaluates.where.not(user_id:@article.user_info.id)
-  end
-
-  def show
+    @evaluates = @article.evaluates.where.not(user_id:@article.user_info.id)
   end
 
   def new
-    @evaluate = Evaluate.new
-    @article = Article.find(params[:article_id])
+    @evaluate = current_user.evaluates.build
   end
 
   def create
-    @article = Article.find(params[:article_id])
-    @evaluate = Evaluate.new(evaluate_params)
-    @evaluate.user_id = current_user.id
-    @evaluate.article_id = @article.id
-
+    @evaluate = current_user.evaluates.build(evaluate_params)
     respond_to do |format|
       if @evaluate.save
         format.html { redirect_to root_path, notice: '評価しました！' }
       else
-        format.html { render :new }
         @evaluate.errors.each do |name, msg|
           tName = t "activerecord.attributes.evaluate.#{name}"
           @evaluate.errors.messages[name] =  tName + msg
@@ -37,25 +28,27 @@ class EvaluatesController < ApplicationController
   end
 
   def edit
-    @article = @evaluate.article
   end
 
   def update
-        @article = Article.find(params[:article_id])
     respond_to do |format|
       if @evaluate.update(evaluate_params)
         format.html { redirect_to root_path, notice: '評価を修正しました！' }
-        format.json { render :show, status: :ok, location: @evaluate }
       else
-        format.html { render :new }
         @evaluate.errors.each do |name, msg|
           tName = t "activerecord.attributes.evaluate.#{name}"
           @evaluate.errors.messages[name] =  tName + msg
         end
         @evaluate.errors.messages[:target] = "evaluate"
-        format.js   { render json: @evaluate.errors }
+        format.js { render json: @evaluate.errors }
       end
     end
+  end
+
+  private
+
+  def set_article
+    @article = Article.find(params[:article_id])
   end
 
   def set_evaluate
@@ -63,7 +56,8 @@ class EvaluatesController < ApplicationController
   end
 
   def evaluate_params
-      # params.require(:picture).permit(:date)
-      params.require(:evaluate).permit(:date,:evaluate,:eva_comment)
+    params.require(:evaluate)
+      .permit(:date,:evaluate,:eva_comment)
+      .merge(article_id:@article.id)
   end
 end
