@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :liked_articles, through: :likes, source: :article
 
   #ユーザー評価した記事を取得する
-  has_many :articles_evaluated, through: :evaluates, source: :article
+  has_many :evaluated_articles, through: :evaluates, source: :article
 
   #スコープmethod
   #ユーザーの記事全体の中から評価されたものだけ取得する

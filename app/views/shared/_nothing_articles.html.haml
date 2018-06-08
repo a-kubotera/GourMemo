@@ -2,12 +2,12 @@
   .alert.alert-dismissible.alert-info
     %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
       %i.fa.fa-times{"aria-hidden" => "true"}
-    -if @is_ArtCnt
+    -if @tagId == "article"
       = t('messages.nothing_articles.article',
         :user_name => your_name?(@user),
         :status => @user.articles.count == 0? t('messages.nothing_articles.non'):t('messages.nothing_articles.done') )       
       = simple_format(t('messages.nothing_articles.art_thanks')) if @user.id == current_user.id
-    - elsif @is_EvaCnt
+    - else
       = t('messages.nothing_articles.evaluate',
         :user_name => your_name?(@user))
       = simple_format(t('messages.nothing_articles.eva_thanks')) if @user.id == current_user.id
