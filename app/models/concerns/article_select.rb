@@ -1,7 +1,7 @@
 module ArticleSelect
   extend ActiveSupport::Concern
 
-  def set_articles
+  def article_selection
     # TODO// Routingを見直す
     # TODO// sort方法を検討
     if params[:user_id] || params[:uid]

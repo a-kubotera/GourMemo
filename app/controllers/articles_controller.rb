@@ -5,7 +5,7 @@ class ArticlesController < ApplicationController
 
   def index
     @user = User&.find(params[:user_id].present?? params[:user_id] : params[:uid])
-    @articles = set_articles
+    @articles = article_selection
     # paramがuidかuser_idかでタグがarticleかevaluateかを判定
     # TODO// 別の方法を検討
     @tagId = params[:uid].blank?? "article" : "evaluate"
@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
       if @article.save
         format.html { redirect_to root_path, notice: '投稿しました！' }
       else
-        format.html { render :new }
         @article.errors.each do |name, msg|
           tName = t "activerecord.attributes.article.#{name}"
           @article.errors.messages[name] =  tName + msg
@@ -49,7 +48,6 @@ class ArticlesController < ApplicationController
       if @article.update(article_params)
         format.html { redirect_to root_path, notice: '修正完了しました！' }
       else
-        format.html { render :new }
         @article.errors.each do |name, msg|
           tName = t "activerecord.attributes.article.#{name}"
           flash.now[name] = tName + msg
