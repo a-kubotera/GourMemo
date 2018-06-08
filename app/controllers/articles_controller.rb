@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
     @user = User&.find(params[:user_id].present?? params[:user_id] : params[:uid])
     @articles = set_articles
     # paramがuidかuser_idかでタグがarticleかevaluateかを判定
+    # TODO// 別の方法を検討
     @tagId = params[:uid].blank?? "article" : "evaluate"
   end
 
@@ -14,8 +15,8 @@ class ArticlesController < ApplicationController
   def show
     @like = Like.new
     @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
-    #イイねした人だけが評価できる
-    #@likesEvaluate =  @article.likes.where(user_id:current_user.id)
+    # TODO// イイねした人だけが評価できるようにする
+    # @likesEvaluate =  @article.likes.where(user_id:current_user.id)
   end
 
   def new
@@ -58,12 +59,12 @@ class ArticlesController < ApplicationController
           @article.errors.messages[key] = flash.now[key]
         }
         @article.errors.messages[:target] = "article"
-        binding.pry
-        #非同期でエラーを表示させる
+        # 非同期でエラーを表示させる
         format.js   { render json: @article.errors }
       end
     end
   end
+
   def destroy
     @article.destroy
     respond_to do |format|
@@ -72,11 +73,15 @@ class ArticlesController < ApplicationController
   end
 
   private
-    def set_article
-      @article = Article.find(params[:id])
-    end
 
-    def article_params
-      params.require(:article).permit(:name,:address,:tell,:art_comment,:source,:genre,:parking,:station,:picture,:image_cache, :remove_image)
-    end
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(
+      :name, :address, :tell, :art_comment, :source, :genre, :parking, 
+      :station, :picture, :image_cache, :remove_image
+      )
+  end
 end

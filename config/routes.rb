@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   #記事周り
   resources :articles do
     resources :likes,  only: [:create, :destroy]
-    resources :evaluates
+    resources :evaluates, only: [:index, :new, :create, :edit, :update]
   end
 
   #フォロー関連
