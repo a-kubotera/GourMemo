@@ -4,7 +4,9 @@ class ArticlesController < ApplicationController
   include ArticleSelect
 
   def index
-    @user = User&.find(params[:user_id].present?? params[:user_id] : params[:uid])
+    @user = User.find(params.values.first) if params.values.first.to_i != 0 
+    # paramにidが存在しない = 全件表示 / idが渡らない場合1番目にはController名が来る
+
     @articles = article_selection
     # paramがuidかuser_idかでタグがarticleかevaluateかを判定
     # TODO// 別の方法を検討
