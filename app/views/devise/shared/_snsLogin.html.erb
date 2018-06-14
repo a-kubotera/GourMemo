@@ -1,9 +1,11 @@
 <div class="links-sns">
-  <div>
-  <%= link_to omniauth_authorize_path(resource_name, 'twitter'),class:"links-sns_twitter" do %>
-    <i class="fa fa-twitter"></i> Twitterでログイン
-  <% end %>
-  </div>
+  <%# 
+    <div>
+    <%= link_to omniauth_authorize_path(resource_name, 'twitter'),class:"links-sns_twitter" do 
+      <i class="fa fa-twitter"></i> Twitterでログイン
+    <% end
+    </div> 
+    %>
   <div>
   <%= link_to omniauth_authorize_path(resource_name, 'facebook'),class:"links-sns_facebook" do %>
     <i class="fa fa-facebook"></i> FaceBookでログイン
