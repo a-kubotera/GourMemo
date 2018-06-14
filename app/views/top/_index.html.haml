@@ -62,8 +62,7 @@
                 %td.plase
                   = f.station
                 %td.point
-                  -# unless f.evaluates.where(user_id:f.user_info.id).blank?
-                    ポイントを表示
+                  = '評価済み' if f.evaluates.present?
                 %td.date
                   = f.created_at.strftime("%y/%m/%d")
       #profile.tab-pane.fade.col-xs-12
