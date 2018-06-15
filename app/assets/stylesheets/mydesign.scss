@@ -245,10 +245,10 @@ body{overflow-x: hidden;}
     margin-top:10px;
     margin-bottom:10px;
     &_someoneEvaluate{
-      height: 0px;
-      position:relative;
-      top:14px;
-      right:10px;
+      height: 30px;
+      // position:relative;
+      // top:14px;
+      // right:10px;
       text-align: right;
     }
   }
@@ -374,27 +374,27 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
   &-img{
     width: 100%;
     position: absolute;
-    // top:0px;
-     left:0px;
+    top:0px;
+    left:0px;
     z-index: -1;
   }
   &-siteTitle{
-     position:relative;
-     top:50px;
-     color:#FFF;
-     padding:0px;
-     margin:0px;
-     >h1{
-       padding:0px;
-       margin:0px;
-       @include fz_vw(16);
-     }
-     >p.lead{
-       padding:0px;
-       margin:0px;
-       margin-top:20px;
-       margin-left:20px;
-     }
+    position:relative;
+    top:50px;
+    color:#FFF;
+    padding:0px;
+    margin:0px;
+    >h1{
+      padding:0px;
+      margin:0px;
+      @include fz_vw(16);
+    }
+    >p.lead{
+      padding:0px;
+      margin:0px;
+      margin-top:20px;
+      margin-left:20px;
+    }
   }
 }
 
@@ -418,8 +418,11 @@ img{//Helperに渡すavatar用クラス　すべてimg限定
       @include ellipsis;
     }
 }
-
-
-.test{
-
+.well-sm{
+  min-height:2.5em !important;
+}
+.top_flash{
+  position: absolute;
+  width: 100%;
+  opacity: 0.9;
 }

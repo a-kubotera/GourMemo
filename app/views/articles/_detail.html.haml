@@ -19,12 +19,11 @@
 - not_login_user?(@article.user_info.id) do
   .articleDetail-likes{:style => "display:"}
     = render partial: '/likes/like', locals: {article: @article, like: @like}
-
-- unless @evaluate.blank?
+- if @article.evaluates.where("user_id != #{@article.user_id}").present?
   .articleDetail-buttons_someoneEvaluate
     = link_to article_evaluates_path(article_id:@article.id),remote:true do
       みんなの評価
-
+- if @evaluate.present?
   .panel.panel-danger.articleDetail-evaluate
     .panel-heading
       %h3.panel-title

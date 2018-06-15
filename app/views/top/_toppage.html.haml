@@ -1,3 +1,6 @@
+.top_flash
+  = render partial: 'shared/flash'
+
 .container.landingPage
   = image_tag 'bg.jpg',class:"topPage-img"
   .row
@@ -6,3 +9,4 @@
       = simple_format(t('common.sitecomment'),:class => "lead")
     .ver
       ver 1.2.2a
+
