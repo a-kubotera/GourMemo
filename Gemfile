@@ -55,7 +55,8 @@ group :development do
   gem 'annotate'
   gem 'bullet'
   gem 'bundler-audit'  
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'meowcop', require: false
   gem 'letter_opener_web' 
   gem 'awesome_print'
   gem 'web-console', '~> 2.0'  

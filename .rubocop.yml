@@ -1,0 +1,26 @@
+inherit_gem:
+  meowcop:
+    - config/rubocop.yml
+
+AllCops:
+  TargetRubyVersion:  2.3.1
+  TargetRailsVersion: 4.2.3
+  Exclude:
+    - "vendor/**/*" 
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "bin/**/*"
+    # テスト未実装のため、除外 実装時に修正する
+    - "test/**/*"
+
+  DisplayCopNames: true
+
+# コロンの後にスペースを一つ入れる
+Style/SpaceAfterColon:
+  Enabled: true
+# カンマの後にスペースを一つ入れる
+Style/SpaceAfterComma:
+  Enabled: true
+# %i記法でコード量を削減する
+Style/SymbolArray:
+  Enabled: true 
