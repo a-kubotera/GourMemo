@@ -1,7 +1,7 @@
 ja:
   messages:
     hello_user: ようこそ %{user_name} さん
-    topix: '%{user_name}の更新履歴'
+    topix: '%{user_name}の記事投稿履歴'
     post: '%{date} 投稿'
     nothing_articles:
       article: '%{user_name}の登録したお店は%{status}'
