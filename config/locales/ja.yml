@@ -13,6 +13,7 @@ ja:
       evaluate: '%{user_name}が評価した記事がありません。'
       eva_thanks: |
         自分で登録したお店や、いいね！したお店に実際に行ってみて、評価しよう！
+      search_result: 検索結果は０件です。別の条件を指定してください。
   common:
     sitetitle: ~ GourMemo ~
     sitecomment: |

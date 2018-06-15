@@ -6,18 +6,18 @@
         .col-xs-6
           %label.control-label{:for => ""} お店の名前で検索
           %div
-            = f.text_field :name_cont,class:"form-control",placeholder:"お店の名前"
+            = f.text_field :name_cont,class:"form-control", placeholder:"お店の名前"
         .col-xs-6
           %label.control-label{:for => ""} コメントで検索
           %div
-            = f.text_field :art_comment_cont,class:"form-control",placeholder:"コメント"
+            = f.text_field :art_comment_cont,class:"form-control", placeholder:"コメント"
         .col-xs-6
           %label.control-label{:for => ""} 住所で検索
           %div
-            = f.text_field :address_cont,class:"form-control",placeholder:"お店の住所"
+            = f.text_field :address_cont,class:"form-control", placeholder:"お店の住所"
         .col-xs-6.articleList-serchButton
           %button.btn.btn-default{:type => "submit"}
             %i.fa.fa-search{"aria-hidden" => "true"}
             検索
-          %input.btn.btn-default{:type => "reset", :value => "リセット"}/
+          = f.button "リセット", type: :reset, class:"btn btn-default"
   = render partial: 'articles_list', locals: {articles: @articles}
