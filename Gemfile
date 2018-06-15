@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
 # default
 gem 'rails', '4.2.3'
@@ -26,8 +27,11 @@ gem 'dotenv-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'erb2haml'
 gem 'enum_help' 
+gem 'faker','~> 1.1.2'
+gem 'forgery_ja'
 gem "font-awesome-rails" 
-gem 'fog' 
+gem 'fog'
+gem 'gimei'
 gem 'haml-rails'
 gem 'honoka-rails'
 gem 'her'
@@ -61,9 +65,6 @@ group :development, :test do
   gem 'byebug'
   gem 'better_errors'
   # gem 'factory_bot_rails' # TODO Fix 
-  gem 'faker','~> 1.1.2'
-  gem 'forgery_ja'
-  gem 'gimei'
   gem 'pry'
   gem 'pry-byebug'
   gem 'pry-doc'

@@ -4,7 +4,6 @@ Relationship.delete_all
 User.delete_all
 Article.delete_all
 Evaluate.delete_all
-
 # 初期設定
 Faker::Config.locale = :ja
 
@@ -18,10 +17,11 @@ end
 # 4. 10人それぞれ自分以外の人の記事を3つイイねする
 # 5. いいねした記事を評価する
 
-1.step(10,1) { |n|
+1000.step(1010,1) { |n|
+
   # 1. ユーザー用ダミーデータ作成
   @gimei = Gimei.new 
-  id = n
+  uid = n
   name = @gimei.kanji
   email = Faker::Internet.email
   address = @gimei.prefecture.kanji + @gimei.city.kanji + @gimei.town.kanji
@@ -31,12 +31,11 @@ end
   provider = "provider"
   # Userを作成
   user = User.new(
-    name: name, email: email, age: age, uid: id,
+    id: uid,name: name, email: email, age: age, uid: uid,
     address: address, profile: profile, password: password, provider: provider
   )
   user.skip_confirmation! # メール送信をスキップ
   user.save!
-
   # 2. 記事を2件書く
   1.step(2,1){ |m|
     @gimei = Gimei.new
@@ -49,7 +48,7 @@ end
     sorce = ["TVでみた","ネットでみた","雑誌で読んだ","たまたま通りかかった"].sample
     Article.seed(
       id: aid, name: title, address: address, tell: phone, station: station,
-      art_comment:comment, source:sorce, user_id: id
+      art_comment:comment, source:sorce, user_id: uid
     )
   }
   # 3. 書いた記事のうちの1つを評価する
@@ -60,7 +59,7 @@ end
 } 
 
 # 4. 10人それぞれ自分以外の人の記事を3つイイねする
-1.step(10,1) { |n|
+1000.step(1010,1) { |n|
   current_user = User.find(n)
   user_ids = User.ids
   user_ids.delete(n)
@@ -70,7 +69,7 @@ end
     user_ids.delete(num)
     article_id = User.find(num).articles.sample.id
     Like.seed(
-      id: lid = Like.count + 1, 
+      id: Like.count + 1, 
       article_id: article_id,
       user_id: current_user.id
     )
