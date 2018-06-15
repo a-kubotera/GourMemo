@@ -16,7 +16,7 @@
               %span.icon-bar
               %span.icon-bar
               %span.icon-bar
-            = link_to front_path,class:'navbar-brand' do
+            = link_to landingpage_path,class:'navbar-brand' do
               %i.fa.fa-glass{"aria-hidden" => "true"}
               GourMemo
               %i.fa.fa-cutlery{"aria-hidden" => "true"}
@@ -45,7 +45,7 @@
                         %i.fa.fa-search{"aria-hidden" => "true"}
                         %span ユーザー検索
                     %li
-                      = link_to destroy_user_session_path, method: :delete do
+                      = link_to logout_path, method: :delete do
                         %i.fa.fa-sign-out{"aria-hidden" => "true"}
                         %span サインアウト
             - else

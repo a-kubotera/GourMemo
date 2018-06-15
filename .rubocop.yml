@@ -12,6 +12,10 @@ AllCops:
     - "bin/**/*"
     # テスト未実装のため、除外 実装時に修正する
     - "test/**/*"
+    - "spec/**/*"
+    # TODO FIX seedデータは作り直すため除外
+    - "db/seeds.rb"
+
 
   DisplayCopNames: true
 

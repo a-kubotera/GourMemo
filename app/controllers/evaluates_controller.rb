@@ -1,10 +1,10 @@
 class EvaluatesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_article, only: [:index, :new, :edit, :create, :update]
-  before_action :set_evaluate, only: [:show, :edit, :update]
+  before_action :set_article, only: %i[index new edit create update]
+  before_action :set_evaluate, only: %i[show edit update]
 
   def index
-    @evaluates = @article.evaluates.where.not(user_id:@article.user_info.id)
+    @evaluates = @article.evaluates.where.not(user_id: @article.user_info)
   end
 
   def new
@@ -57,7 +57,7 @@ class EvaluatesController < ApplicationController
 
   def evaluate_params
     params.require(:evaluate)
-      .permit(:date,:evaluate,:eva_comment)
-      .merge(article_id:@article.id)
+      .permit(:date, :evaluate, :eva_comment)
+      .merge(article_id: @article.id)
   end
 end
