@@ -27,7 +27,7 @@ gem 'dotenv-rails'
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 gem 'erb2haml'
 gem 'enum_help' 
-gem 'faker','~> 1.1.2'
+gem 'faker', '~> 1.1.2'
 gem 'forgery_ja'
 gem "font-awesome-rails" 
 gem 'fog'

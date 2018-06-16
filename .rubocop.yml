@@ -28,3 +28,8 @@ Style/SpaceAfterComma:
 # %i記法でコード量を削減する
 Style/SymbolArray:
   Enabled: true 
+
+# Block数が多いのは一部仕方ない
+Metrics/BlockLength:
+  Exclude:
+    - 'db/fixtures/seeddata.rb'
