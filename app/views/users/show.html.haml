@@ -1,2 +1,2 @@
 .col-xs-10.col-xs-offset-1{:style => "min-width:800px;"}
-  = render 'top/index'
+  = render partial: 'top/index', locals: {user: @user}

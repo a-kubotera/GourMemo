@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: :index
+  before_action :set_article, only: %i[show edit update destroy]
   include ArticleSelect
 
   def index
@@ -16,9 +16,7 @@ class ArticlesController < ApplicationController
   
   def show
     @like = Like.new
-    @evaluate = @article.evaluates.where(user_id:@article.user_info.id).first
-    # TODO// イイねした人だけが評価できるようにする
-    # @likesEvaluate =  @article.likes.where(user_id:current_user.id)
+    @evaluate = @article.evaluates.where(user_id: @article.user_info).first
   end
 
   def new

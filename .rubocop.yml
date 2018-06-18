@@ -1,0 +1,35 @@
+inherit_gem:
+  meowcop:
+    - config/rubocop.yml
+
+AllCops:
+  TargetRubyVersion:  2.3.1
+  TargetRailsVersion: 4.2.3
+  Exclude:
+    - "vendor/**/*" 
+    - "db/schema.rb"
+    - "db/migrate/*"
+    - "bin/**/*"
+    # テスト未実装のため、除外 実装時に修正する
+    - "test/**/*"
+    - "spec/**/*"
+    # TODO FIX seedデータは作り直すため除外
+    - "db/seeds.rb"
+
+
+  DisplayCopNames: true
+
+# コロンの後にスペースを一つ入れる
+Style/SpaceAfterColon:
+  Enabled: true
+# カンマの後にスペースを一つ入れる
+Style/SpaceAfterComma:
+  Enabled: true
+# %i記法でコード量を削減する
+Style/SymbolArray:
+  Enabled: true 
+
+# Block数が多いのは一部仕方ない
+Metrics/BlockLength:
+  Exclude:
+    - 'db/fixtures/seeddata.rb'
