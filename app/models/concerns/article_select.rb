@@ -16,7 +16,8 @@ module ArticleSelect
       # 全件ユーザー表示 + 検索
       @q       = Article.search(params[:q])
       @q.sorts = 'id asc'
-      @q.result(distinct: true)
+      # @q.result(distinct: true)
+      @q.result.includes(:user_info, likes:[:user])
     end
   end
 end
