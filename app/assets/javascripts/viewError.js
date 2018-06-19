@@ -1,54 +1,28 @@
 $(document).on('turbolinks:load', function () {
-
-  $(document).bind('ajaxError', 'form#user_modal', function(event, jqxhr, settings, exception){
-
-    // note: jqxhr.responseJSON undefined, parsing responseText instead
-    if (jqxhr.responseText === undefined) {
-      jqxhr.responseText = {"name":"名前を入力してください"}
-      let a = jqxhr.responseText
-      jqxhr.responseText = JSON.stringify(a)
-
+  $(document).bind('ajaxError', 'form#user_modal', function (event, jqxhr) {
+    if (jqxhr.responseText !== undefined) { // 写真をセットした場合, responseTextが undefind
+      $(event.data).render_form_errors($.parseJSON(jqxhr.responseText));
     }
-    // debugger
-    $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
-
   });
-
 });
 
-(function($) {
-
-  $.fn.modal_success = function(){
-    // close modal
-    this.modal('hide');
-
-    // clear form input elements
-    // todo/note: handle textarea, select, etc
-    this.find('form input[type="text"]').val('');
-
-    // clear error state
-    this.clear_previous_errors();
-  };
-
+(function ($) {
+  // Json型のエラー情報({name:"message",・・})から、該当箇所にClassとメッセージをセットするプラグイン
   $.fn.render_form_errors = function(errors){
-
-    $form = this;
+    // 全エラーを一旦削除
     this.clear_previous_errors();
     model = errors.target
-
-    // エラーが発生した場合、以下の処理が走る
-    $.each(errors, function(field, messages){
+    $.each(errors, function (field, messages) {
       $input = $('[name="' + model + '[' + field + ']"]');
       $input.closest('.form-group').addClass('has-error').find('.help-block').html(messages);
     });
-
   };
-
   $.fn.clear_previous_errors = function(){
-    $('.form-group.has-error').each(function(){
+    $('.form-group.has-error').each(function () {
+      // メッセージをすべて削除
       $('.help-block').html('');
+      // has-errorをすべて削除
       $(this).removeClass('has-error');
     });
   }
-
 }(jQuery));
